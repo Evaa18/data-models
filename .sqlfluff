@@ -1,0 +1,42 @@
+# https://docs.sqlfluff.com/en/stable/configuration.html
+[sqlfluff]
+dialect = bigquery
+templater = dbt
+max_line_length = 150
+# dbt templating does not keep trailing new lines (L009)
+
+#######
+# Rules
+#######
+# By default, pick all rules from sqlfluff
+# Only exclude lines below
+
+## Excluded rules & reasons
+exclude_rules = RF02,ST07,ST06,AM04,CV03
+warnings = LT01,LT02,ST09
+
+# LT01 Inappropriate Spacing.
+#   Has several sub-rules
+# LT02
+#   Bug on BigQuery : https://github.com/sqlfluff/sqlfluff/issues/4531
+# CV03 Disabled until issue is fixed
+#   https://github.com/sqlfluff/sqlfluff/issues/4574
+# RF02 References should be qualified if select has more than one referenced table/view.
+#   👀 to rediscuss
+# ST07 Prefer specifying join keys instead of using “USING”.
+#   => using allows to avoid duplicate keys / less verbose code
+#      it also ensures the unicity of the join key, otherwise it raises "ambiguous key" which is good
+#   => WARNING -> Certain warehouses have inconsistencies in USING results (specifically Snowflake).
+# ST06 Use wildcards then simple select targets before calculations and aggregates.
+#   => Prevents us from organizing fields logically
+# AM04 Query produces an unknown number of result columns.
+#   👀 to rediscuss, star pattern is double edged
+# LT13 Files must not begin with newlines or whitespace.
+#   Must learn to use jinja minus sign <%- to avoid whitespaces for macros
+# ST09 Joins should list the table referenced earlier/later first.¶
+#   Can be hard to use in models like _as_ga4_event
+
+[sqlfluff:rules]
+
+[sqlfluff:rules:convention.select_trailing_comma]
+select_clause_trailing_comma = require
