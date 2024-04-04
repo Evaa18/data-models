@@ -6,7 +6,7 @@ WITH calendar AS (
     FROM
         UNNEST(
             GENERATE_DATE_ARRAY(
-                '2016-06-01',
+                '2023-01-01',
                 CURRENT_DATE(),
                 INTERVAL 1 DAY)
             ) AS measured_at

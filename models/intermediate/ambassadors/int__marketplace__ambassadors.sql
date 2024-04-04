@@ -11,7 +11,19 @@ SELECT
     address_country,
     address_administrative_area_level_1_region_fr,
     address_administrative_area_level_2_department_fr,
-    address_administrative_area_level_3_fr
+    address_administrative_area_level_3_fr,
+    CASE
+        WHEN {{ ambassador_is_industry_ambassador("ambassadors.company_id") }}
+        THEN 'industry'
+        WHEN {{ ambassador_is_premium("ambassador_type") }}
+        THEN 'premium_except_industry'
+        WHEN ambassador_type = 'Mentor' AND user_situation = 'in_activity'
+        THEN 'ambassadors_except_youth'
+        WHEN NOT user_situation = 'in_activity' --add that we only select the ones who have an user_created_at before the realease date of ambivalence-v2
+        THEN 'youth_ambassadors'
+        WHEN NOT user_situation = 'in_activity'
+        THEN 'youth_ambassadors_new'
+    END AS ambassador_classification
 FROM
     {{ ref('base__marketplace__ambassadors') }} AS ambassadors
 INNER JOIN

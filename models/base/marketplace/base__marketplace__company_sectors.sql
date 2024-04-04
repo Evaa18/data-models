@@ -7,6 +7,6 @@ SELECT
     name AS company_sector_name,
     normalized_name AS company_sector_normalized_name,
     linkedin_code AS company_sector_linkedin_code,
-    COALESCE(hidden_from_search, false) AS company_sector_hidden_from_search
+    COALESCE(hidden_from_search, FALSE) AS company_sector_hidden_from_search
 FROM
     {{ source('marketplace', 'company_sectors') }}
