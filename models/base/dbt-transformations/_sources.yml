@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: dbt-transformations
+    schema: dbt_production
+    database: alexandria-stitch
+    tables:
+      - name: snapshot_professionals_status

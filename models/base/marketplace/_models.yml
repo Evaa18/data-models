@@ -1,0 +1,96 @@
+version: 2
+
+models:
+  - name: base__marketplace__users
+    description: "Users accounts on backend-marketplace, formerly Hermes"
+    columns:
+      - name: user_id
+        description: '{{ doc("user_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: intercom_user_id
+        description: '{{ doc("intercom_user_id") }}'
+        tests:
+          - unique
+      - name: france_travail_id
+        description: '{{ doc("france_travail_id") }}'
+        tests:
+          - unique
+      - name: widget_source_id
+        description: '{{ doc("widget_source_id") }}'
+      - name: user_created_at
+        description: '{{ doc("user_created_at") }}'
+      - name: user_updated_at
+        description: '{{ doc("user_updated_at") }}'
+      - name: user_soft_deleted_at
+        description: '{{ doc("user_soft_deleted_at") }}'
+      - name: user_cache_last_active_at
+        description: '{{ doc("user_cache_last_active_at") }}'
+      - name: user_reset_password_sent_at
+        description: '{{ doc("user_reset_password_sent_at") }}'
+      - name: user_widget_source_added_at
+        description: '{{ doc("user_widget_source_added_at") }}'
+      - name: user_is_ambivalent
+        description: '{{ doc("user_is_ambivalent") }}'
+      - name: user_first_name
+        description: '{{ doc("user_first_name") }}'
+      - name: user_last_name
+        description: '{{ doc("user_last_name") }}'
+      - name: user_email
+        description: '{{ doc("user_email") }}'
+      - name: user_unconfirmed_email
+        description: '{{ doc("user_unconfirmed_email") }}'
+      - name: user_normalized_phone
+        description: '{{ doc("user_normalized_phone") }}'
+      - name: user_avatar
+        description: '{{ doc("user_avatar") }}'
+      - name: user_languages
+        description: '{{ doc("user_languages") }}'
+      - name: user_meeting_preferences
+        description: '{{ doc("user_meeting_preferences") }}'
+      - name: user_meeting_place
+        description: '{{ doc("user_meeting_place") }}'
+      - name: user_situation
+        description: '{{ doc("user_situation") }}'
+        tests:
+          - accepted_values:
+              values:
+              - "junior_high_school_student"
+              - "senior_high_school_student"
+              - "graduate_student"
+              - "in_activity"
+              - null
+      - name: user_is_situation_confirmed_after_ambivalence
+        description: '{{ doc("user_is_situation_confirmed_after_ambivalence") }}'
+      - name: user_email_locale
+        description: '{{ doc("user_email_locale") }}'
+      - name: user_referrer_code
+        description: '{{ doc("user_referrer_code") }}'
+        tests:
+          - unique
+          - not_null
+      - name: user_is_high_school_teacher
+        description: '{{ doc("user_is_high_school_teacher") }}'
+        tests:
+          - not_null
+      - name: user_is_oriane_ambassador
+        description: '{{ doc("user_is_oriane_ambassador") }}'
+        tests:
+          - not_null
+      - name: user_has_france_travail_connect
+        description: '{{ doc("user_has_france_travail_connect") }}'
+        tests:
+          - not_null
+      - name: user_is_subscribed_to_red_carpets
+        description: '{{ doc("user_is_subscribed_to_red_carpets") }}'
+      - name: user_has_videoconference_enabled
+        description: '{{ doc("user_has_videoconference_enabled") }}'
+      - name: user_is_user_soft_deleted
+        description: '{{ doc("user_is_user_soft_deleted") }}'
+      - name: user_soft_deleted_reason
+        description: '{{ doc("user_soft_deleted_reason") }}'
+      - name: user_is_anonymized
+        description: '{{ doc("user_is_anonymized") }}'
+      - name: user_sign_up_utm
+        description: '{{ doc("user_sign_up_utm") }}'

@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: marketplace
+    schema: hermes_v3
+    database: alexandria-stitch
+    tables:
+      - name: ambivalent_address_datasets
+      - name: companies
+      - name: company_sectors
+      - name: professionals
+      - name: users
+  - name: dbt-transformations
+    schema: dbt_production
+    database: alexandria-stitch
+    tables:
+      - name: snapshot_ambassadors_status

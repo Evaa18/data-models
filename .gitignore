@@ -7,3 +7,4 @@ logs/
 dbt-env/
 .vscode/
 .ds_store
+package-lock.yml
