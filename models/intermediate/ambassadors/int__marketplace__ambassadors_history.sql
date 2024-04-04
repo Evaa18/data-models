@@ -1,8 +1,9 @@
 {{ config(materialized='table') }}
 
-WITH history as (
+WITH history AS (
 SELECT
     int__marketplace__ambassadors.ambassador_id,
+    ambassador_classification,
     snapshot.ambassador_company_name,
     ambassador_job_title,
     address_country,
@@ -23,8 +24,9 @@ GROUP BY ALL
 
 SELECT * FROM history
 UNION ALL
-SELECT 
+SELECT
     ambassador_id,
+    ambassador_classification,
     ambassador_company_name,
     ambassador_job_title,
     address_country,
@@ -34,5 +36,5 @@ SELECT
     ambassador_is_published,
     ambassador_is_visible,
     ambassador_is_available,
-    CURRENT_TIMESTAMP() as dbt_valid_from
+    CURRENT_TIMESTAMP() AS dbt_valid_from
 FROM history QUALIFY ROW_NUMBER() OVER (PARTITION BY ambassador_id ORDER BY dbt_valid_from DESC) = 1

@@ -19,9 +19,9 @@ SELECT
         THEN 'premium_except_industry'
         WHEN ambassador_type = 'Mentor' AND user_situation = 'in_activity'
         THEN 'ambassadors_except_youth'
-        WHEN NOT user_situation = 'in_activity' --add that we only select the ones who have an user_created_at before the realease date of ambivalence-v2
+        WHEN NOT user_situation = 'in_activity' --add that we only select the ones who have an user_created_at AFTER the realease date of ambivalence-v2
         THEN 'youth_ambassadors'
-        WHEN NOT user_situation = 'in_activity'
+        WHEN NOT user_situation = 'in_activity' --add that we only select the ones who have an user_created_at AFTER the realease date of ambivalence-v2
         THEN 'youth_ambassadors_new'
     END AS ambassador_classification
 FROM
