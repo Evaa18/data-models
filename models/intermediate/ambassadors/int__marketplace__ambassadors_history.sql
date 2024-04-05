@@ -1,10 +1,23 @@
 {{ config(materialized='table') }}
 
-WITH history AS (
+WITH snpashot_preped AS (
+    SELECT
+        ambassador_id,
+        ambassador_company_name,
+        ambassador_is_published,
+        ambassador_is_visible,
+        ambassador_is_available,
+        dbt_valid_from
+    FROM
+        {{ ref('base__dbt_transformations__snapshot_ambassadors_status') }}
+    QUALIFY ROW_NUMBER() OVER (PARTITION BY ambassador_id ORDER BY dbt_valid_from DESC) = 1
+),
+
+history AS (
 SELECT
     int__marketplace__ambassadors.ambassador_id,
     ambassador_classification,
-    snapshot.ambassador_company_name,
+    snpashot_preped.ambassador_company_name,
     ambassador_job_title,
     address_country,
     address_administrative_area_level_1_region_fr,
@@ -17,7 +30,7 @@ SELECT
 FROM
     {{ ref('int__marketplace__ambassadors') }}
 LEFT JOIN
-    {{ ref('base__dbt_transformations__snapshot_ambassadors_status') }} AS snapshot
+    snpashot_preped
     USING(ambassador_id)
 GROUP BY ALL
 )

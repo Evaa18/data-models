@@ -3,6 +3,8 @@
 SELECT
     professional_id AS ambassador_id,
     company_id,
+    denormalized_becomes_available_or_iced_up_at AS ambassador_becomes_available_or_iced_up_at,
+    denormalized_is_unavailable_from_monthly_quota_cached_at AS ambassador_is_unavailable_from_monthly_quota_cached_at,
     company_name AS ambassador_company_name,
     professional_type AS ambassador_type,
     professional_current_status AS ambassador_status,

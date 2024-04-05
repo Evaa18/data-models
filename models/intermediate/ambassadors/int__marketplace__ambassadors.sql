@@ -18,11 +18,12 @@ SELECT
         WHEN {{ ambassador_is_premium("ambassador_type") }}
         THEN 'premium_except_industry'
         WHEN ambassador_type = 'Mentor' AND user_situation = 'in_activity'
-        THEN 'ambassadors_except_youth'
+        THEN 'ambassadors_except_youth' --if nulls, add in 'ambassadors_except_youth' (user premium(company::employee) not in_activity)
         WHEN NOT user_situation = 'in_activity' --add that we only select the ones who have an user_created_at AFTER the realease date of ambivalence-v2
         THEN 'youth_ambassadors'
         WHEN NOT user_situation = 'in_activity' --add that we only select the ones who have an user_created_at AFTER the realease date of ambivalence-v2
         THEN 'youth_ambassadors_new'
+        ELSE 'unsure'
     END AS ambassador_classification
 FROM
     {{ ref('base__marketplace__ambassadors') }} AS ambassadors

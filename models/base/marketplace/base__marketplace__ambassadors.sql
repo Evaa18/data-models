@@ -60,6 +60,6 @@ SELECT
     iced_up AS ambassador_is_iced_up,
     ice_up_reason AS ambassador_last_iced_up_reason,
     max_meetings_per_month AS ambassador_max_appointments_per_month,
-    publication_request_completion_percentage AS ambassador_publication_request_completion_percentage
+    publication_request_completion_percentage AS ambassador_publication_request_completion_percentag
 FROM
     {{ source('marketplace', 'professionals') }}

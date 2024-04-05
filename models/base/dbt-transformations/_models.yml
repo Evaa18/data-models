@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: base__dbt_transformations__snapshot_ambassadors_status
+    description: "View of a snapshot in dbt-transformations with ambassadors' characteristics"
+    columns:
+      - name: ambassador_id
+        description: '{{ doc("ambassador_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: company_id
+        description: '{{ doc("company_id") }}'
+      - name: ambassador_becomes_available_or_iced_up_at
+        description: '{{ doc("ambassador_becomes_available_or_iced_up_at") }}'
+      - name: ambassador_is_unavailable_from_monthly_quota_cached_at
+        description: '{{ doc("ambassador_is_unavailable_from_monthly_quota_cached_at") }}'
+      - name: ambassador_company_name
+        description: '{{ doc("ambassador_company_name") }}'
+      - name: ambassador_type
+        description: '{{ doc("ambassador_type") }}'
+      - name: ambassador_status
+        description: '{{ doc("ambassador_status") }}'
+      - name: ambassador_is_visible
+        description: '{{ doc("ambassador_is_visible") }}'
+      - name: ambassador_is_available
+        description: '{{ doc("ambassador_is_available") }}'
+      - name: ambassador_is_hibernated
+        description: '{{ doc("ambassador_is_hibernated") }}'
+      - name: ambassador_is_published
+        description: '{{ doc("ambassador_is_published") }}'
+      - name: ambassador_is_iced_up
+        description: '{{ doc("ambassador_is_iced_up") }}'
+      - name: ambassador_is_soft_deleted
+        description: '{{ doc("ambassador_is_soft_deleted") }}'
+      - name: ambassador_max_appointments_per_month
+        description: '{{ doc("ambassador_max_appointments_per_month") }}'
+      - name: dbt_updated_at
+        description: '{{ doc("dbt_updated_at") }}'
+      - name: dbt_valid_from
+        description: '{{ doc("dbt_valid_from") }}'
+      - name: dbt_valid_to
+        description: '{{ doc("dbt_valid_to") }}'
