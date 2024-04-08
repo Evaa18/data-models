@@ -475,3 +475,102 @@ Reference of the original LinkedIn Sector Code.
 Boolean taking the value true when the sector is hidden from seach filters, false otherwise.
 {% enddocs %}
 
+{% docs conversation_id %}
+ID of the conversation.
+{% enddocs %}
+
+{% docs seeker_id %}
+ID of the seeker.
+{% enddocs %}
+
+{% docs denormalized_wish_before_start_id %}
+ID of the wish. A wish is when a seeker bookmarked an ambassador's profile before initiating a conversation.
+{% enddocs %}
+
+{% docs denormalized_red_carpet_roll_id %}
+ID of the roll carpet roll. I happens when the conversation is initiated after an ambassador had rolled a red carper to the seeker.
+{% enddocs %}
+
+{% docs email_thread_reference_id %}
+ID of the email thread for the reply by email feature.
+{% enddocs %}
+
+{% docs seeker_email_id %}
+ID that identifies if the seeker is replying by email in the context of this conversation. When the seeker replies to the ambassador, this should be the identifier before the @ for the reply-by-email feature.
+{% enddocs %}
+
+{% docs ambassador_email_id %}
+ID that identifies if the ambassador is replying by email in the context of this conversation. When the ambassador replies to the seeker, this should be the identifier before the @ for the reply-by-email feature.
+{% enddocs %}
+
+{% docs conversation_seeker_situation_company_id %}
+Company ID of the seeker when the conversation was initiated.
+{% enddocs %}
+
+{% docs conversation_ambassador_situation_company_id %}
+Company ID of the ambassador when the conversation was initiated.
+{% enddocs %}
+
+{% docs conversation_denormalized_last_sender_id %}
+User ID of the last message sender.
+{% enddocs %}
+
+{% docs conversation_initiated_at %}
+Timestamp of when the conversation was initiated by the seeker.
+{% enddocs %}
+
+{% docs conversation_updated_at %}
+Timestamp of when the conversation was last updated by the system.
+{% enddocs %}
+
+{% docs conversation_denormalized_last_message_sent_at %}
+A copy of the timestamp of when the last message was sent and processed by the system.
+{% enddocs %}
+
+{% docs conversation_denormalized_ambassador_first_response_at %}
+A copy of the timestamp when the first ambassador message was sent in this conversation.
+{% enddocs %}
+
+{% docs conversation_denormalized_seeker_first_response_at %}
+A copy of the timestamp when the first seeker message was sent following the first ambassador message in this conversation.
+{% enddocs %}
+
+{% docs conversation_denormalized_acknowledged_at %}
+A copy of the timestamp of when we know for sure the last message was acknowledged by the recipient. It is not reset to null after another message is sent.
+{% enddocs %}
+
+{% docs conversation_denormalized_need_acknowledgement_at %}
+A copy of the timestamp of when the first message of the last sender message streak was sent.
+{% enddocs %}
+
+{% docs conversation_last_invalidated_at %}
+Timestamp of when the conversation was last invalidated.
+{% enddocs %}
+
+{% docs conversation_utm_at_initiation %}
+UTM parameters recorded when the conversation was initiated.
+{% enddocs %}
+
+{% docs conversation_denormalized_ambassador_first_response_time %}
+A cached computation of the timestamp when the first professional message was sent in this conversation minus the timestamp when this conversation was initiated.
+{% enddocs %}
+
+{% docs conversation_denormalized_seeker_first_response_time %}
+A cached computation of the first student message was sent following the first professional message in this conversation minus the timestamp when this conversation was initiated.
+{% enddocs %}
+
+{% docs conversation_denormalized_is_acknowledged %}
+Boolean taking the value true when
+{% enddocs %}
+
+{% docs conversation_is_disabled %}
+Boolean taking the value true when the conversation is disabled because of the following reasons: the professional was flagged as a fake mentor account (see is_invalidated), the student deleted his account, the professional deleted his account, or other reason (manual flagging by MJG admins), false otherwise.
+{% enddocs %}
+
+{% docs conversation_is_invalidated %}
+Boolean taking the value true when the conversation was invalidated following a professional restriction, false otherwise.
+{% enddocs %}
+
+{% docs conversation_last_invalidated_reason %}
+Reason of last invalidation of the conversation.
+{% enddocs %}

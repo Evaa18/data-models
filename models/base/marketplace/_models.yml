@@ -209,6 +209,110 @@ models:
       - name: company_sector_hidden_from_search
         description: '{{ doc("company_sector_hidden_from_search") }}'
 
+
+
+
+
+  - name: base__marketplace__conversations
+    description: "Model of all conversations with an ambassador initiated by a seeker. Often abbreviated CI (conversation initiated)"
+    columns:
+      - name: conversation_id
+        description: '{{ doc("conversation_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: seeker_user_id
+        description: '{{ doc("user_id") }}'
+        tests:
+          - relationships:
+              to: ref ('base__marketplace__users')
+              field: user_id
+      - name: ambassador_user_id
+        description: '{{ doc("user_id") }}'
+        tests:
+          - relationships:
+              to: ref ('base__marketplace__users')
+              field: user_id
+      - name: seeker_id
+        description: '{{ doc("seeker_id") }}'
+      - name: ambassador_id
+        description: '{{ doc("ambassador_id") }}'
+        tests:
+          - relationships:
+              to: ref ('base__marketplace__ambassadors')
+              field: user_id
+      - name: denormalized_wish_before_start_id
+        description: '{{ doc("denormalized_wish_before_start_id") }}'
+      - name: denormalized_red_carpet_roll_id
+        description: '{{ doc("denormalized_red_carpet_roll_id") }}'
+      - name: email_thread_reference_id
+        description: '{{ doc("email_thread_reference_id") }}'
+      - name: seeker_email_id
+        description: '{{ doc("seeker_email_id") }}'
+      - name: ambassador_email_id
+        description: '{{ doc("ambassador_email_id") }}'
+      - name: conversation_seeker_situation_company_id
+        description: '{{ doc("user_situation") }}'
+      - name: conversation_ambassador_situation_company_id
+        description: '{{ doc("user_situation") }}'
+      - name: conversation_denormalized_last_sender_id
+        description: '{{ doc("conversation_denormalized_last_sender_id") }}'
+        tests:
+          - not_null
+      - name: conversation_initiated_at
+        description: '{{ doc("conversation_initiated_at") }}'
+        tests:
+          - not_null
+      - name: conversation_updated_at
+        description: '{{ doc("conversation_updated_at") }}'
+        tests:
+          - not_null
+      - name: conversation_denormalized_last_message_sent_at
+        description: '{{ doc("conversation_denormalized_last_message_sent_at") }}'
+      - name: conversation_denormalized_ambassador_first_response_at
+        description: '{{ doc("conversation_denormalized_ambassador_first_response_at") }}'
+      - name: conversation_denormalized_seeker_first_response_at
+        description: '{{ doc("conversation_denormalized_seeker_first_response_at") }}'
+      - name: conversation_denormalized_acknowledged_at
+        description: '{{ doc("conversation_denormalized_acknowledged_at") }}'
+      - name: conversation_denormalized_need_acknowledgement_at
+        description: '{{ doc("conversation_denormalized_need_acknowledgement_at") }}'
+      - name: conversation_last_invalidated_at
+        description: '{{ doc("conversation_last_invalidated_at") }}'
+      - name: ambassador_type
+        description: '{{ doc("ambassador_type") }}'
+        tests:
+          - accepted_values:
+              values:
+                - Ambassador
+                - Mentor
+                - VIP
+      - name: conversation_utm_at_initiation
+        description: '{{ doc("conversation_utm_at_initiation") }}'
+      - name: conversation_seeker_situation_at_initiation
+        description: '{{ doc("conversation_seeker_situation_at_initiation") }}'
+      - name: conversation_ambassador_situation_at_initiation
+        description: '{{ doc("conversation_ambassador_situation_at_initiation") }}'
+      - name: conversation_denormalized_ambassador_first_response_time
+        description: '{{ doc("conversation_denormalized_ambassador_first_response_time") }}'
+      - name: conversation_denormalized_seeker_first_response_time
+        description: '{{ doc("conversation_denormalized_seeker_first_response_time") }}'
+      - name: conversation_denormalized_is_acknowledged
+        description: '{{ doc("conversation_denormalized_is_acknowledged") }}'
+      - name: conversation_is_disabled
+        description: '{{ doc("conversation_is_disabled") }}'
+      - name: conversation_is_invalidated
+        description: '{{ doc("conversation_is_invalidated") }}'
+      - name: conversation_last_invalidated_reason
+        description: '{{ doc("conversation_last_invalidated_reason") }}'
+
+
+
+
+
+
+
+
   - name: base__marketplace__users
     description: "Users accounts."
     columns:

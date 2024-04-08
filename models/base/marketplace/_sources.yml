@@ -8,6 +8,7 @@ sources:
       - name: ambivalent_address_datasets
       - name: companies
       - name: company_sectors
+      - name: conversations
       - name: professionals
       - name: users
   - name: dbt-transformations

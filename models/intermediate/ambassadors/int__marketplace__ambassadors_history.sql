@@ -10,7 +10,7 @@ WITH snpashot_preped AS (
         dbt_valid_from
     FROM
         {{ ref('base__dbt_transformations__snapshot_ambassadors_status') }}
-    QUALIFY ROW_NUMBER() OVER (PARTITION BY ambassador_id ORDER BY dbt_valid_from DESC) = 1
+    QUALIFY ROW_NUMBER() OVER (PARTITION BY dbt_valid_from, ambassador_id ORDER BY dbt_valid_from DESC) = 1
 ),
 
 history AS (

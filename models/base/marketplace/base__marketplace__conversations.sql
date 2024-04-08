@@ -1,0 +1,36 @@
+{{ config(materialized='view') }}
+
+SELECT
+    _id AS conversation_id,
+    initiator_id AS seeker_user_id,
+    recipient_id AS ambassador_user_id,
+    initiator_profile_id AS seeker_id,
+    recipient_profile_id AS ambassador_id,
+    wish_before_start_id AS denormalized_wish_before_start_id,
+    red_carpet_roll_id AS denormalized_red_carpet_roll_id,
+    email_thread_reference_id,
+    seeker_email_id,
+    professional_email_id AS ambassador_email_id,
+    initiator_company_when_started_id AS conversation_seeker_situation_company_id,
+    recipient_company_when_started_id AS conversation_ambassador_situation_company_id,
+    last_sender_id AS conversation_denormalized_last_sender_id,
+    created_at AS conversation_initiated_at,
+    updated_at AS conversation_updated_at,
+    last_message_at AS conversation_denormalized_last_message_sent_at,
+    first_response_at AS conversation_denormalized_ambassador_first_response_at,
+    first_student_response_at AS conversation_denormalized_seeker_first_response_at,
+    acknowledged_at AS conversation_denormalized_acknowledged_at,
+    need_acknowledge_since AS conversation_denormalized_need_acknowledgement_at,
+    last_invalidated_at AS conversation_last_invalidated_at,
+    {{ ambassador_type("recipient_profile_type") }} AS ambassador_type,
+    utm AS conversation_utm_at_initiation,
+    initiator_situation_when_started AS conversation_seeker_situation_at_initiation,
+    recipient_situation_when_started AS conversation_ambassador_situation_at_initiation,
+    response_time AS conversation_denormalized_ambassador_first_response_time,
+    student_response_time AS conversation_denormalized_seeker_first_response_time,
+    acknowledged AS conversation_denormalized_is_acknowledged,
+    disabled AS conversation_is_disabled,
+    invalidated AS conversation_is_invalidated,
+    invalidated_reason AS conversation_last_invalidated_reason
+FROM
+    {{ source('marketplace', 'conversations') }}
