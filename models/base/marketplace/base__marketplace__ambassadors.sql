@@ -24,6 +24,8 @@ SELECT
     last_unrestricted_at AS ambassador_last_unrestricted_at,
     unavailable_until_cache AS ambassador_becomes_available_or_iced_up_at,
     last_iced_up_at AS ambassador_last_iced_up_at,
+    warmup_started_at AS ambassador_warmup_started_at,
+    warmup_ended_at AS ambassador_warmup_ended_at,
     last_melted_at AS ambassador_last_melted_at,
     invitation.email AS ambassador_invitation_email,
     invitation.first_name AS ambassador_invitation_first_name,

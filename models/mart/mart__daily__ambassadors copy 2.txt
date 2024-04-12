@@ -1,0 +1,87 @@
+{{ config(materialized='table') }}
+
+SELECT
+    DATE(dbt_valid_from) AS measured_at,
+    ambassador_classification,
+    ambassador_company_name,
+    company_sector_name,
+    ambassador_job_title,
+    address_country,
+    address_administrative_area_level_1_region_fr,
+    address_administrative_area_level_2_department_fr,
+    address_city_fr,
+    address_postal_code,
+    COUNT(DISTINCT
+        IF(
+            ambassador_is_published,
+            ambassador_id,
+            NULL
+        )
+    ) AS ambassadors_published,
+    COUNT(DISTINCT
+        IF(
+            ambassador_is_visible,
+            ambassador_id,
+            NULL
+        )
+    ) AS ambassadors_visible,
+    COUNT(DISTINCT
+        IF(
+            ambassador_is_available,
+            ambassador_id,
+            NULL
+        )
+    ) AS ambassadors_available
+FROM
+    {{ ref('int__marketplace__ambassadors_history_filled') }}
+GROUP BY ALL
+
+
+
+
+    COUNT(DISTINCT
+        IF(
+            ambassador_is_in_warm_up,
+            ambassadors_filled.ambassador_id,
+            NULL
+        )
+    ) AS ambassador_in_warm_up,
+    COUNT(DISTINCT
+        IF(
+            ambassador_is_in_red_crisis
+            AND NOT ambassador_is_hibernated,
+            ambassadors_filled.ambassador_id,
+            NULL
+        )
+    ) AS ambassador_in_red_crisis,
+    COUNT(DISTINCT
+        IF(
+            ambassador_is_restricted,
+            ambassadors_filled.ambassador_id,
+            NULL
+        )
+    ) AS ambassador_restricted,
+    COUNT(DISTINCT
+        IF(
+            ambassador_is_invalidated,
+            ambassadors_filled.ambassador_id,
+            NULL
+        )
+    ) AS ambassador_invalidated,
+    COUNT(DISTINCT
+        IF(
+            ambassador_is_invalidated,
+            ambassadors_filled.ambassador_id,
+            NULL
+        )
+    ) AS ambassador_invalidated,
+    COUNT(DISTINCT
+        IF(
+            NOT ambassador_is_available
+            AND NOT ambassador_is_hibernated
+            AND NOT ambassador_is_in_warm_up
+            AND NOT ambassador_is_in_red_crisis,
+            ambassadors_filled.ambassador_id,
+            NULL
+        )
+    ) AS ambassador_saturated,

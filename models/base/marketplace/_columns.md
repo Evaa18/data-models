@@ -406,6 +406,14 @@ Boolean taking the value true when the ambassador is currently published, false 
 UTM recorded the last time the ambassador requested publication. Always a map of utm parameters, even if all values are null. Available from [unknown date], legacy data were filled with a map of null values
 {% enddocs %}
 
+{% docs conversation_seeker_situation_at_initiation %}
+Situation of the seeker when the conversation was initiated.
+{% enddocs %}
+
+{% docs conversation_ambassador_situation_at_initiation %}
+Situation of the ambassador when the conversation was initiated.
+{% enddocs %}
+
 {% docs ambassador_promotions %}
 List of multimedia content showcased on the ambassador profile.
 {% enddocs %}

@@ -20,44 +20,25 @@ SELECT
     ) AS ambassadors_published,
     COUNT(DISTINCT
         IF(
-            ambassador_is_unpublished
-            AND NOT ambassador_is_iced_up
-            AND NOT ambassador_is_restricted
-            AND NOT ambassador_is_invalidated,
-            ambassadors_filled.ambassador_id,
-            NULL
-        )
-    ) AS ambassador_unpublished,
-    COUNT(DISTINCT
-        IF(
-            ambassador_is_published
-            AND NOT ambassador_is_iced_up
-            AND NOT ambassador_is_restricted
-            AND NOT ambassador_is_invalidated,
+            ambassador_is_visible,
             ambassadors_filled.ambassador_id,
             NULL
         )
     ) AS ambassadors_visible,
     COUNT(DISTINCT
         IF(
-            NOT ambassador_is_available
-            AND NOT ambassador_is_iced_up
-            AND NOT ambassador_is_restricted
-            AND NOT ambassador_is_invalidated,
+            ambassador_is_available,
             ambassadors_filled.ambassador_id,
             NULL
         )
     ) AS ambassadors_available,
     COUNT(DISTINCT
         IF(
-            ambassador_is_available
-            AND NOT ambassador_is_iced_up
-            AND NOT ambassador_is_restricted
-            AND NOT ambassador_is_invalidated,
+            ambassador_is_in_warm_up,
             ambassadors_filled.ambassador_id,
             NULL
         )
-    ) AS ambassadors_unavailable,
+    ) AS ambassador_in_warm_up,
     SUM(ambassadors_contacted) AS ambassadors_contacted,
     SUM(conversations_received) AS conversations_received
 FROM

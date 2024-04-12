@@ -7,11 +7,13 @@ SELECT
     company_sectors.company_sector_id,
     users.user_created_at,
     ambassador_company_name,
+    company_sector_name.en AS company_sector_name,
     ambassador_job_title,
     address_country,
     address_administrative_area_level_1_region_fr,
     address_administrative_area_level_2_department_fr,
-    address_administrative_area_level_3_fr,
+    address_city_fr,
+    address_postal_code,
     CASE
         WHEN {{ ambassador_is_industry_ambassador("ambassadors.company_id") }}
         THEN 'industry'
