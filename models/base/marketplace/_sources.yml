@@ -11,6 +11,7 @@ sources:
       - name: conversations
       - name: professionals
       - name: professional_crises
+      - name: seekers
       - name: users
   - name: dbt-transformations
     schema: dbt_production

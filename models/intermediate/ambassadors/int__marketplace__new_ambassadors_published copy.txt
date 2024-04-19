@@ -16,6 +16,17 @@ WITH snpashot_preped AS (
     QUALIFY ROW_NUMBER() OVER (PARTITION BY dbt_valid_from, ambassador_id ORDER BY dbt_valid_from DESC) = 1
 ),
 
+new_published AS (
+    SELECT
+        ambassador_id,
+        MIN(dbt_valid_from) AS first_publication_at
+    FROM
+        snpashot_preped
+    WHERE
+        ambassador_is_published
+    GROUP BY ALL
+),
+
 history AS (
     SELECT
         int__marketplace__ambassadors.ambassador_id,
@@ -29,6 +40,7 @@ history AS (
         address_city_fr,
         address_postal_code,
         ambassador_is_published,
+        new_published.ambassador_id IS NOT NULL AS new_ambassador_is_published,
         ambassador_is_visible,
         ambassador_is_available,
         ambassador_is_hibernated,
@@ -40,6 +52,10 @@ history AS (
     LEFT JOIN
         snpashot_preped
         USING(ambassador_id)
+    LEFT JOIN
+        new_published
+        ON snpashot_preped.ambassador_id = new_published.ambassador_id
+        AND snpashot_preped.dbt_valid_from = new_published.first_publication_at
     GROUP BY ALL
 )
 
@@ -57,6 +73,7 @@ SELECT
     address_city_fr,
     address_postal_code,
     ambassador_is_published,
+    new_ambassador_is_published,
     ambassador_is_visible,
     ambassador_is_available,
     ambassador_is_hibernated,

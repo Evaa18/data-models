@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: google-sheets
+    schema: target_google_sheets
+    database: mjg-data-models
+    tables:
+      - name: target_members
+      - name: target_published_ambassadors
