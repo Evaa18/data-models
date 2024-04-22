@@ -3,7 +3,7 @@
 SELECT
     date AS targeted_at,
     audience AS target_audience,
-    objective_value AS target_value__active_memners
+    objective_value AS target_value__created_members
 FROM
     {{ source('google-sheets', 'target_members') }}
-WHERE type = 'active'
+WHERE type = 'created'

@@ -1,8 +1,18 @@
 {{ config(materialized='table') }}
 
+WITH target AS (
+    SELECT
+        targeted_at,
+        target_audience,
+        MIN(target_value__created_members) AS target_value__created_members
+    FROM
+        {{ ref('base__google_sheets__target_created_members') }}
+    GROUP BY ALL
+)
+
 SELECT
-    DATE(measured_at) AS measured_at,
-    member_type,
+    COALESCE(DATE(measured_at), targeted_at) AS measured_at,
+    COALESCE(member_type, target_audience) AS member_type,
     ambassador_company_name,
     company_sector_name,
     address_country,
@@ -23,7 +33,12 @@ SELECT
             seeker_id,
             NULL
         )
-    ) AS new_members_activated
+    ) AS new_members_activated,
+    target_value__created_members
 FROM
     {{ ref('int__marketplace__members_history_filled') }} AS members_filled
+FULL OUTER JOIN
+    target
+    ON DATE(members_filled.measured_at) = target.targeted_at
+    AND members_filled.member_type = target.target_audience
 GROUP BY ALL

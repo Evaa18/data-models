@@ -112,7 +112,7 @@ conversations AS (
     GROUP BY ALL
 ),
 
-new_ambassadors AS (
+new_published_ambassadors AS (
     SELECT
         user_created_at,
         ambassador_classification,
@@ -130,6 +130,58 @@ new_ambassadors AS (
     GROUP BY ALL
 ),
 
+new_disengaged_ambassadors AS (
+    SELECT
+        DATE(dbt_valid_from) AS ambassador_first_disengaged_at,
+        ambassador_classification,
+        ambassador_company_name,
+        company_sector_name,
+        ambassador_job_title,
+        address_country,
+        address_administrative_area_level_1_region_fr,
+        address_administrative_area_level_2_department_fr,
+        address_city_fr,
+        address_postal_code,
+        COUNT(DISTINCT
+            IF(
+                new_ambassadors_is_iced_up,
+                ambassador_id,
+                NULL
+            )
+        ) AS new_ambassadors_iced_up,
+        COUNT(DISTINCT
+            IF(
+                new_ambassadors_is_soft_deleted,
+                ambassador_id,
+                NULL
+            )
+        ) AS new_ambassadors_soft_deleted,
+        COUNT(DISTINCT
+            IF(
+                new_ambassadors_is_restricted,
+                ambassador_id,
+                NULL
+            )
+        ) AS new_ambassadors_restricted,
+        COUNT(DISTINCT
+            IF(
+                new_ambassadors_is_invalidated,
+                ambassador_id,
+                NULL
+            )
+        ) AS new_ambassadors_invalidated,
+        COUNT(DISTINCT
+            IF(
+                new_ambassadors_is_disengaged,
+                ambassador_id,
+                NULL
+            )
+        ) AS new_ambassadors_disengaged,
+    FROM
+        {{ ref('int__marketplace__new_ambassadors_disengaged') }}
+    GROUP BY ALL
+),
+
 target AS (
     SELECT
         targeted_at,
@@ -141,16 +193,16 @@ target AS (
 )
 
 SELECT
-    COALESCE(ambassadors_filled.measured_at, conversations.conversation_initiated_at, new_ambassadors.user_created_at, target.targeted_at) AS measured_at,
-    COALESCE(ambassadors_filled.ambassador_classification, conversations.ambassador_classification, new_ambassadors.ambassador_classification, target.ambassador_classification) AS ambassador_classification,
-    COALESCE(ambassadors_filled.ambassador_company_name, conversations.ambassador_company_name, new_ambassadors.ambassador_company_name) AS ambassador_company_name,
-    COALESCE(ambassadors_filled.company_sector_name, conversations.company_sector_name, new_ambassadors.company_sector_name) AS company_sector_name,
-    COALESCE(ambassadors_filled.ambassador_job_title, conversations.ambassador_job_title, new_ambassadors.ambassador_job_title) AS ambassador_job_title,
-    COALESCE(ambassadors_filled.address_country, conversations.address_country, new_ambassadors.address_country) AS address_country,
-    COALESCE(ambassadors_filled.address_administrative_area_level_1_region_fr, conversations.address_administrative_area_level_1_region_fr, new_ambassadors.address_administrative_area_level_1_region_fr) AS address_administrative_area_level_1_region_fr,
-    COALESCE(ambassadors_filled.address_administrative_area_level_2_department_fr, conversations.address_administrative_area_level_2_department_fr, new_ambassadors.address_administrative_area_level_2_department_fr) AS address_administrative_area_level_2_department_fr,
-    COALESCE(ambassadors_filled.address_city_fr, conversations.address_city_fr, new_ambassadors.address_city_fr) AS address_city_fr,
-    COALESCE(ambassadors_filled.address_postal_code, conversations.address_postal_code, new_ambassadors.address_postal_code) AS address_postal_code,
+    COALESCE(ambassadors_filled.measured_at, conversations.conversation_initiated_at, new_published_ambassadors.user_created_at, new_disengaged_ambassadors.ambassador_first_disengaged_at, target.targeted_at) AS measured_at,
+    COALESCE(ambassadors_filled.ambassador_classification, conversations.ambassador_classification, new_published_ambassadors.ambassador_classification, new_disengaged_ambassadors.ambassador_classification, target.ambassador_classification) AS ambassador_classification,
+    COALESCE(ambassadors_filled.ambassador_company_name, conversations.ambassador_company_name, new_published_ambassadors.ambassador_company_name, new_disengaged_ambassadors.ambassador_company_name) AS ambassador_company_name,
+    COALESCE(ambassadors_filled.company_sector_name, conversations.company_sector_name, new_published_ambassadors.company_sector_name, new_disengaged_ambassadors.company_sector_name) AS company_sector_name,
+    COALESCE(ambassadors_filled.ambassador_job_title, conversations.ambassador_job_title, new_published_ambassadors.ambassador_job_title, new_disengaged_ambassadors.ambassador_job_title) AS ambassador_job_title,
+    COALESCE(ambassadors_filled.address_country, conversations.address_country, new_published_ambassadors.address_country, new_disengaged_ambassadors.address_country) AS address_country,
+    COALESCE(ambassadors_filled.address_administrative_area_level_1_region_fr, conversations.address_administrative_area_level_1_region_fr, new_published_ambassadors.address_administrative_area_level_1_region_fr, new_disengaged_ambassadors.address_administrative_area_level_1_region_fr) AS address_administrative_area_level_1_region_fr,
+    COALESCE(ambassadors_filled.address_administrative_area_level_2_department_fr, conversations.address_administrative_area_level_2_department_fr, new_published_ambassadors.address_administrative_area_level_2_department_fr, new_disengaged_ambassadors.address_administrative_area_level_2_department_fr) AS address_administrative_area_level_2_department_fr,
+    COALESCE(ambassadors_filled.address_city_fr, conversations.address_city_fr, new_published_ambassadors.address_city_fr, new_disengaged_ambassadors.address_city_fr) AS address_city_fr,
+    COALESCE(ambassadors_filled.address_postal_code, conversations.address_postal_code, new_published_ambassadors.address_postal_code, new_disengaged_ambassadors.address_postal_code) AS address_postal_code,
     ambassadors_published,
     ambassador_unpublished,
     ambassadors_visible,
@@ -164,7 +216,12 @@ SELECT
     conversations_received,
     ambassadors_contacted,
     new_ambassadors_published,
-    MIN(target_value__published_ambassadors) AS target_value__published_ambassadors
+    new_ambassadors_iced_up,
+    new_ambassadors_soft_deleted,
+    new_ambassadors_restricted,
+    new_ambassadors_invalidated,
+    new_ambassadors_disengaged,
+    target_value__published_ambassadors
 FROM
     ambassadors_filled
 FULL OUTER JOIN
@@ -180,17 +237,29 @@ FULL OUTER JOIN
     AND ambassadors_filled.address_postal_code = conversations.address_postal_code
     AND ambassadors_filled.ambassador_classification = conversations.ambassador_classification
 FULL OUTER JOIN
-    new_ambassadors
-    ON DATE(ambassadors_filled.measured_at) = new_ambassadors.user_created_at
-    AND ambassadors_filled.ambassador_company_name = new_ambassadors.ambassador_company_name
-    AND ambassadors_filled.company_sector_name = new_ambassadors.company_sector_name
-    AND ambassadors_filled.ambassador_job_title = new_ambassadors.ambassador_job_title
-    AND ambassadors_filled.address_country = new_ambassadors.address_country
-    AND ambassadors_filled.address_administrative_area_level_1_region_fr = new_ambassadors.address_administrative_area_level_1_region_fr
-    AND ambassadors_filled.address_administrative_area_level_2_department_fr = new_ambassadors.address_administrative_area_level_2_department_fr
-    AND ambassadors_filled.address_city_fr = new_ambassadors.address_city_fr
-    AND ambassadors_filled.address_postal_code = new_ambassadors.address_postal_code
-    AND ambassadors_filled.ambassador_classification = new_ambassadors.ambassador_classification
+    new_published_ambassadors
+    ON DATE(ambassadors_filled.measured_at) = new_published_ambassadors.user_created_at
+    AND ambassadors_filled.ambassador_company_name = new_published_ambassadors.ambassador_company_name
+    AND ambassadors_filled.company_sector_name = new_published_ambassadors.company_sector_name
+    AND ambassadors_filled.ambassador_job_title = new_published_ambassadors.ambassador_job_title
+    AND ambassadors_filled.address_country = new_published_ambassadors.address_country
+    AND ambassadors_filled.address_administrative_area_level_1_region_fr = new_published_ambassadors.address_administrative_area_level_1_region_fr
+    AND ambassadors_filled.address_administrative_area_level_2_department_fr = new_published_ambassadors.address_administrative_area_level_2_department_fr
+    AND ambassadors_filled.address_city_fr = new_published_ambassadors.address_city_fr
+    AND ambassadors_filled.address_postal_code = new_published_ambassadors.address_postal_code
+    AND ambassadors_filled.ambassador_classification = new_published_ambassadors.ambassador_classification
+FULL OUTER JOIN
+    new_disengaged_ambassadors
+    ON DATE(ambassadors_filled.measured_at) = new_disengaged_ambassadors.ambassador_first_disengaged_at
+    AND ambassadors_filled.ambassador_company_name = new_disengaged_ambassadors.ambassador_company_name
+    AND ambassadors_filled.company_sector_name = new_disengaged_ambassadors.company_sector_name
+    AND ambassadors_filled.ambassador_job_title = new_disengaged_ambassadors.ambassador_job_title
+    AND ambassadors_filled.address_country = new_disengaged_ambassadors.address_country
+    AND ambassadors_filled.address_administrative_area_level_1_region_fr = new_disengaged_ambassadors.address_administrative_area_level_1_region_fr
+    AND ambassadors_filled.address_administrative_area_level_2_department_fr = new_disengaged_ambassadors.address_administrative_area_level_2_department_fr
+    AND ambassadors_filled.address_city_fr = new_disengaged_ambassadors.address_city_fr
+    AND ambassadors_filled.address_postal_code = new_disengaged_ambassadors.address_postal_code
+    AND ambassadors_filled.ambassador_classification = new_disengaged_ambassadors.ambassador_classification
 FULL OUTER JOIN
     target
     ON DATE(ambassadors_filled.measured_at) = target.targeted_at

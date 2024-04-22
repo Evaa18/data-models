@@ -80,8 +80,7 @@ SELECT
     unpublished_ambassadors.ambassador_id IS NOT NULL AS ambassador_is_unpublished,
     red_crisis_ambassadors.ambassador_id IS NOT NULL AS ambassador_is_in_red_crisis,
     IF(
-        ambassador_first_published_at < DATE(dbt_valid_from)
-        OR ambassador_is_iced_up
+        ambassador_is_iced_up
         OR ambassador_is_soft_deleted
         OR restricted_ambassadors.ambassador_id IS NOT NULL
         OR invalidated_ambassadors.ambassador_id IS NOT NULL,

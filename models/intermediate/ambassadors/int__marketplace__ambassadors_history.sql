@@ -1,6 +1,6 @@
 {{ config(materialized='table') }}
 
-WITH snpashot_preped AS (
+WITH snapshot_preped AS (
     SELECT
         ambassador_id,
         ambassador_company_name,
@@ -20,7 +20,7 @@ history AS (
     SELECT
         int__marketplace__ambassadors.ambassador_id,
         ambassador_classification,
-        snpashot_preped.ambassador_company_name,
+        snapshot_preped.ambassador_company_name,
         company_sector_name,
         ambassador_job_title,
         address_country,
@@ -38,7 +38,7 @@ history AS (
     FROM
         {{ ref('int__marketplace__ambassadors') }}
     LEFT JOIN
-        snpashot_preped
+        snapshot_preped
         USING(ambassador_id)
     GROUP BY ALL
 )
