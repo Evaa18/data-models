@@ -1,7 +1,7 @@
 {{ config(materialized='table') }}
 
 SELECT
-    DATE(user_created_at) AS user_created_at,
+    DATE(ambassador_first_published_at) AS ambassador_first_published_at,
     ambassador_classification,
     ambassador_company_name,
     company_sector_name,

@@ -6,6 +6,7 @@ SELECT
     address.address_id,
     company_sectors.company_sector_id,
     users.user_created_at,
+    ambassador_first_published_at,
     ambassador_company_name,
     company_sector_name.en AS company_sector_name,
     ambassador_job_title,

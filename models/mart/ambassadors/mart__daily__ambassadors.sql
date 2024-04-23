@@ -114,7 +114,7 @@ conversations AS (
 
 new_published_ambassadors AS (
     SELECT
-        user_created_at,
+        ambassador_first_published_at,
         ambassador_classification,
         ambassador_company_name,
         company_sector_name,
@@ -193,7 +193,7 @@ target AS (
 )
 
 SELECT
-    COALESCE(ambassadors_filled.measured_at, conversations.conversation_initiated_at, new_published_ambassadors.user_created_at, new_disengaged_ambassadors.ambassador_first_disengaged_at, target.targeted_at) AS measured_at,
+    COALESCE(ambassadors_filled.measured_at, conversations.conversation_initiated_at, new_published_ambassadors.ambassador_first_published_at, new_disengaged_ambassadors.ambassador_first_disengaged_at, target.targeted_at) AS measured_at,
     COALESCE(ambassadors_filled.ambassador_classification, conversations.ambassador_classification, new_published_ambassadors.ambassador_classification, new_disengaged_ambassadors.ambassador_classification, target.ambassador_classification) AS ambassador_classification,
     COALESCE(ambassadors_filled.ambassador_company_name, conversations.ambassador_company_name, new_published_ambassadors.ambassador_company_name, new_disengaged_ambassadors.ambassador_company_name) AS ambassador_company_name,
     COALESCE(ambassadors_filled.company_sector_name, conversations.company_sector_name, new_published_ambassadors.company_sector_name, new_disengaged_ambassadors.company_sector_name) AS company_sector_name,
@@ -238,7 +238,7 @@ FULL OUTER JOIN
     AND ambassadors_filled.ambassador_classification = conversations.ambassador_classification
 FULL OUTER JOIN
     new_published_ambassadors
-    ON DATE(ambassadors_filled.measured_at) = new_published_ambassadors.user_created_at
+    ON DATE(ambassadors_filled.measured_at) = DATE(new_published_ambassadors.ambassador_first_published_at)
     AND ambassadors_filled.ambassador_company_name = new_published_ambassadors.ambassador_company_name
     AND ambassadors_filled.company_sector_name = new_published_ambassadors.company_sector_name
     AND ambassadors_filled.ambassador_job_title = new_published_ambassadors.ambassador_job_title
@@ -264,4 +264,3 @@ FULL OUTER JOIN
     target
     ON DATE(ambassadors_filled.measured_at) = target.targeted_at
     AND ambassadors_filled.ambassador_classification = target.ambassador_classification
-GROUP BY ALL
