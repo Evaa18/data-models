@@ -142,6 +142,14 @@ new_disengaged_ambassadors AS (
         address_administrative_area_level_2_department_fr,
         address_city_fr,
         address_postal_code,
+        new_ambassadors_first_disengaged_reason,
+        COUNT(DISTINCT
+            IF(
+                new_ambassadors_is_unpublished,
+                ambassador_id,
+                NULL
+            )
+        ) AS new_ambassadors_unpublished,
         COUNT(DISTINCT
             IF(
                 new_ambassadors_is_iced_up,
@@ -176,7 +184,7 @@ new_disengaged_ambassadors AS (
                 ambassador_id,
                 NULL
             )
-        ) AS new_ambassadors_disengaged,
+        ) AS new_ambassadors_disengaged
     FROM
         {{ ref('int__marketplace__new_ambassadors_disengaged') }}
     GROUP BY ALL
@@ -203,6 +211,7 @@ SELECT
     COALESCE(ambassadors_filled.address_administrative_area_level_2_department_fr, conversations.address_administrative_area_level_2_department_fr, new_published_ambassadors.address_administrative_area_level_2_department_fr, new_disengaged_ambassadors.address_administrative_area_level_2_department_fr) AS address_administrative_area_level_2_department_fr,
     COALESCE(ambassadors_filled.address_city_fr, conversations.address_city_fr, new_published_ambassadors.address_city_fr, new_disengaged_ambassadors.address_city_fr) AS address_city_fr,
     COALESCE(ambassadors_filled.address_postal_code, conversations.address_postal_code, new_published_ambassadors.address_postal_code, new_disengaged_ambassadors.address_postal_code) AS address_postal_code,
+    new_ambassadors_first_disengaged_reason,
     ambassadors_published,
     ambassador_unpublished,
     ambassadors_visible,
@@ -216,6 +225,7 @@ SELECT
     conversations_received,
     ambassadors_contacted,
     new_ambassadors_published,
+    new_ambassadors_unpublished,
     new_ambassadors_iced_up,
     new_ambassadors_soft_deleted,
     new_ambassadors_restricted,

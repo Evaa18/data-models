@@ -26,7 +26,7 @@ SELECT
     current_rating AS seeker_denormalized_average_rating_of_first_question,
     replied_conversations_count_cache AS seeker_replied_conversations_count_cache,
     affiliated_to_assignment_cache AS seeker_denormalized_involved_in_a_fdr,
-    confirmed_appointment_with_professional_feedback_count AS seeker_denormalized_confirmed_appointment_with_professional_review_count,
+    confirmed_appointment_with_professional_feedback_count AS seeker_denormalized_confirmed_appointment_with_ambassador_review_count,
     confirmed_appointment_count AS seeker_denormalized_confirmed_appointment_count,
     appointments_per_month AS seeker_denormalized_appointments_per_month,
     referrals_initiated_count AS seeker_denormalized_referrals_initiated_count,

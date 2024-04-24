@@ -8,6 +8,7 @@ SELECT
     denormalized_latest_crisis_started_at AS ambassador_latest_crisis_started_at,
     last_restricted_at AS ambassador_last_restricted_at,
     last_invalidated_at AS ambassador_last_invalidated_at,
+    last_unpublished_at AS ambassador_last_unpublished_at,
     company_name AS ambassador_company_name,
     professional_type AS ambassador_type,
     professional_current_status AS ambassador_status,

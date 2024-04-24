@@ -92,7 +92,7 @@ FROM
 LEFT JOIN
     unpublished_ambassadors
     ON unpublished_ambassadors.ambassador_id = gap_fill_ambassadors.ambassador_id
-    AND (DATE(dbt_valid_from) >= ambassador_first_published_at OR ambassador_first_published_at IS NULL)
+    AND (DATE(dbt_valid_from) <= ambassador_first_published_at OR ambassador_first_published_at IS NULL)
 LEFT JOIN
     warm_up_ambassadors
     ON warm_up_ambassadors.ambassador_id = gap_fill_ambassadors.ambassador_id

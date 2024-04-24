@@ -20,11 +20,11 @@ SELECT
         THEN 'industry'
         WHEN {{ ambassador_is_premium("ambassador_type") }}
         THEN 'premium_except_industry'
-        WHEN ambassador_type = 'Mentor' AND (user_situation = 'in_activity' OR users.account_created_at < {{ professional_members_release_date() }})
+        WHEN ambassador_type = 'Mentor' AND (user_situation = 'in_activity' OR users.user_created_at < {{ ambassador_members_release_date() }})
         THEN 'ambassadors_except_youth' --if nulls, add in 'ambassadors_except_youth' (user premium(company::employee) not in_activity)
-        WHEN NOT user_situation = 'in_activity' AND users.account_created_at < {{ youth_ambassadors_release_date() }} --add that we only select the ones who have an user_created_at AFTER the realease date of ambivalence-v2
+        WHEN NOT user_situation = 'in_activity' AND users.user_created_at < {{ youth_ambassadors_release_date() }} --add that we only select the ones who have an user_created_at AFTER the realease date of ambivalence-v2
         THEN 'pre_ambivalence_member_now_youth_ambassador'
-        WHEN NOT user_situation = 'in_activity' AND users.account_created_at > {{ youth_ambassadors_release_date() }} --add that we only select the ones who have an user_created_at AFTER the realease date of ambivalence-v2
+        WHEN NOT user_situation = 'in_activity' AND users.user_created_at > {{ youth_ambassadors_release_date() }} --add that we only select the ones who have an user_created_at AFTER the realease date of ambivalence-v2
         THEN 'youth_ambassador'
         ELSE 'unsure'
     END AS ambassador_classification

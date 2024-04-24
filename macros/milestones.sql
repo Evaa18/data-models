@@ -1,4 +1,4 @@
-{%- macro professional_members_release_date() -%}
+{%- macro ambassador_members_release_date() -%}
 {# Alwo known as ambivalence v1 release -#}
 "2023-10-12"
 {%- endmacro -%}
