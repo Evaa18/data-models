@@ -3,6 +3,7 @@
 
 SELECT
     seeker_id,
+    user_id,
     DATE(seeker_profile_created_at) AS seeker_profile_created_at,
     member_type,
     ambassador_company_name,

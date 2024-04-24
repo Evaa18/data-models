@@ -5,4 +5,5 @@ sources:
     schema: dbt_production
     database: alexandria-stitch
     tables:
+      - name: dim_seekers_participations
       - name: snapshot_professionals_status

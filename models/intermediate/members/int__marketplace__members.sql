@@ -2,6 +2,7 @@
 
 SELECT
     seeker_id,
+    user_id,
     seeker_profile_created_at,
     IF(
         user_is_high_school_teacher,

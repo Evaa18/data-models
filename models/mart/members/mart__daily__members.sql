@@ -4,6 +4,8 @@ WITH members_activated_and_created AS (
     SELECT
         DATE(measured_at) AS measured_at,
         member_type,
+        member_activation,
+        member_affiliation,
         ambassador_company_name,
         company_sector_name,
         address_country,
@@ -43,6 +45,8 @@ target AS (
 SELECT
     COALESCE(measured_at, conversation_initiated_at, target.targeted_at) AS measured_at,
     COALESCE(members_activated_and_created.member_type, conversations.member_type, target.member_type) AS member_type,
+    member_activation,
+    member_affiliation,
     COALESCE(members_activated_and_created.ambassador_company_name, conversations.ambassador_company_name) AS ambassador_company_name,
     COALESCE(members_activated_and_created.company_sector_name, conversations.company_sector_name) AS company_sector_name,
     COALESCE(members_activated_and_created.address_country, conversations.address_country) AS address_country,
