@@ -10,6 +10,7 @@ sources:
       - name: companies
       - name: company_sectors
       - name: conversations
+      - name: messaging_appointment_claims
       - name: professionals
       - name: professional_crises
       - name: seekers

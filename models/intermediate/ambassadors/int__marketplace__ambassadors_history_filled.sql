@@ -70,10 +70,23 @@ red_crisis_ambassadors AS (
     WHERE
         ambassador_crisis_level_cd = 'red'
         AND ambassador_crisis_started_at IS NOT NULL
+),
+
+nuida_appointements AS (
+    SELECT
+        ambassador_id,
+        DATE(appointment_or_claim_created_on_platform_at) AS appointment_or_claim_created_on_platform_at,
+        COUNT(DISTINCT appointment_or_claim_id) AS nuida_appointments
+    FROM
+        {{ ref('int__marketplace__nuida_appointments') }}
+    WHERE
+        appointment_or_claim_is_nuida
+    GROUP BY ALL
 )
 
 SELECT
     gap_fill_ambassadors.*,
+    nuida_appointments,
     warm_up_ambassadors.ambassador_id IS NOT NULL AS ambassador_is_in_warm_up,
     restricted_ambassadors.ambassador_id IS NOT NULL AS ambassador_is_restricted,
     invalidated_ambassadors.ambassador_id IS NOT NULL AS ambassador_is_invalidated,
@@ -112,3 +125,7 @@ LEFT JOIN
     ON red_crisis_ambassadors.ambassador_id = gap_fill_ambassadors.ambassador_id
     AND DATE(dbt_valid_from) >= ambassador_crisis_started_at
     AND (DATE(dbt_valid_from) <= ambassador_crisis_ended_at OR ambassador_crisis_ended_at IS NULL)
+LEFT JOIN
+    nuida_appointements
+    ON nuida_appointements.ambassador_id = gap_fill_ambassadors.ambassador_id
+    AND appointment_or_claim_created_on_platform_at = DATE(dbt_valid_from)
