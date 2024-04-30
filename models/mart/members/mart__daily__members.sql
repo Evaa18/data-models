@@ -3,7 +3,8 @@
 WITH members_activated_and_created AS (
     SELECT
         DATE(measured_at) AS measured_at,
-        member_type,
+        member_primary_type,
+        member_secondary_type,
         member_activation,
         member_affiliation,
         ambassador_company_name,
@@ -35,7 +36,7 @@ WITH members_activated_and_created AS (
 target AS (
     SELECT
         targeted_at,
-        member_type,
+        member_secondary_type,
         MIN(target_value__created_members) AS target_value__created_members
     FROM
         {{ ref('base__google_sheets__target_created_members') }}
@@ -44,7 +45,8 @@ target AS (
 
 SELECT
     COALESCE(measured_at, conversation_initiated_at, target.targeted_at) AS measured_at,
-    COALESCE(members_activated_and_created.member_type, conversations.member_type, target.member_type) AS member_type,
+    COALESCE(members_activated_and_created.member_primary_type, conversations.member_primary_type) AS member_primary_type,
+    COALESCE(members_activated_and_created.member_secondary_type, target.member_secondary_type) AS member_secondary_type,
     member_activation,
     member_affiliation,
     COALESCE(members_activated_and_created.ambassador_company_name, conversations.ambassador_company_name) AS ambassador_company_name,
@@ -64,7 +66,7 @@ FROM
 FULL OUTER JOIN
     {{ ref('int__marketplace__members_with_conversations') }} AS conversations
     ON members_activated_and_created.measured_at = conversations.conversation_initiated_at
-    AND members_activated_and_created.member_type = conversations.member_type
+    AND members_activated_and_created.member_primary_type = conversations.member_primary_type
     AND members_activated_and_created.ambassador_company_name = conversations.ambassador_company_name
     AND members_activated_and_created.company_sector_name = conversations.company_sector_name
     AND members_activated_and_created.address_country = conversations.address_country
@@ -75,4 +77,4 @@ FULL OUTER JOIN
 FULL OUTER JOIN
     target
     ON DATE(members_activated_and_created.measured_at) = target.targeted_at
-    AND members_activated_and_created.member_type = target.member_type
+    AND members_activated_and_created.member_secondary_type = target.member_secondary_type

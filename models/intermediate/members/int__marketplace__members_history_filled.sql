@@ -8,7 +8,7 @@ WITH gap_fill_created_members AS (
             (SELECT * FROM {{ ref('int__marketplace__members_history') }}),
             ts_column => 'seeker_profile_created_at',
             bucket_width => INTERVAL 1 DAY,
-            partitioning_columns => ['seeker_id', 'user_id', 'member_type','ambassador_company_name','company_sector_name','address_country','address_administrative_area_level_1_region_fr','address_administrative_area_level_2_department_fr','address_city_fr', 'address_postal_code'],
+            partitioning_columns => ['seeker_id', 'user_id', 'member_primary_type',  'user_situation', 'ambassador_company_name','company_sector_name','address_country','address_administrative_area_level_1_region_fr','address_administrative_area_level_2_department_fr','address_city_fr', 'address_postal_code'],
             value_columns => [
                 ('member_is_created','null')
             ]
@@ -43,7 +43,12 @@ SELECT
         user_is_currently_involved_in_a_fdr OR user_is_all_time_involved_in_a_fdr,
         'member_affiliated',
         'member_non_affiliated'
-    ) AS member_affiliation
+    ) AS member_affiliation,
+    {{ member_secondary_type(
+        'member_primary_type',
+        'user_situation',
+        'ambassador_is_published'
+    ) }} AS member_secondary_type
 FROM
     gap_fill_created_members
 FULL OUTER JOIN
@@ -69,3 +74,7 @@ LEFT JOIN
 LEFT JOIN
     {{ ref('base__dbt_transformations__dim_seekers_participations') }} AS affiliation
     ON gap_fill_created_members.user_id = affiliation.user_id
+LEFT JOIN
+    {{ ref('int__marketplace__ambassadors_history') }} AS published_ambassadors
+    ON gap_fill_created_members.user_id = affiliation.user_id
+    AND DATE(gap_fill_created_members.seeker_profile_created_at) = DATE(dbt_valid_from)

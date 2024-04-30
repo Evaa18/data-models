@@ -19,6 +19,7 @@ WITH snapshot_preped AS (
 history AS (
     SELECT
         int__marketplace__ambassadors.ambassador_id,
+        user_id,
         ambassador_classification,
         snapshot_preped.ambassador_company_name,
         company_sector_name,
@@ -47,6 +48,7 @@ SELECT * FROM history
 UNION ALL
 SELECT
     ambassador_id,
+    user_id,
     ambassador_classification,
     ambassador_company_name,
     company_sector_name,

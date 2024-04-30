@@ -9,7 +9,7 @@ SELECT
     address_administrative_area_level_2_department_fr,
     address_city_fr,
     address_postal_code,
-    member_type,
+    member_primary_type,
     COUNT(DISTINCT conversations.seeker_id) AS seekers_contacting,
     COUNT(DISTINCT conversations.conversation_id) AS conversations_received
 FROM

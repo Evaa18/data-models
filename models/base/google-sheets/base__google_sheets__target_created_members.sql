@@ -9,7 +9,7 @@ SELECT
         WHEN audience LIKE '%senior_high_school_student%' THEN 'senior_high_school_student'
         WHEN audience LIKE '%school_teacher%' THEN 'school_teacher'
     ELSE 'unsure'
-    END AS member_type,
+    END AS member_secondary_type,
     SUM(objective_value) AS target_value__created_members
 FROM
     {{ source('google-sheets', 'target_members') }}
