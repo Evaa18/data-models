@@ -46,18 +46,18 @@ target AS (
 )
 
 SELECT
-    COALESCE(measured_at, conversation_initiated_at, target.targeted_at) AS measured_at,
-    COALESCE(members_activated_and_created.member_primary_type, conversations.member_primary_type, target.member_primary_type) AS member_primary_type,
-    COALESCE(members_activated_and_created.member_secondary_type, target.member_secondary_type, target.member_secondary_type) AS member_secondary_type,
+    COALESCE(measured_at, conversation_initiated_at, conversation_replied_at, target.targeted_at) AS measured_at,
+    COALESCE(members_activated_and_created.member_primary_type, conversations.member_primary_type, conversations.member_primary_type, target.member_primary_type) AS member_primary_type,
+    COALESCE(members_activated_and_created.member_secondary_type, conversations.member_secondary_type, replies.member_secondary_type, target.member_secondary_type, target.member_secondary_type) AS member_secondary_type,
     member_activation,
     member_affiliation,
-    COALESCE(members_activated_and_created.ambassador_company_name, conversations.ambassador_company_name) AS ambassador_company_name,
-    COALESCE(members_activated_and_created.company_sector_name, conversations.company_sector_name) AS company_sector_name,
-    COALESCE(members_activated_and_created.address_country, conversations.address_country) AS address_country,
-    COALESCE(members_activated_and_created.address_administrative_area_level_1_region_fr, conversations.address_administrative_area_level_1_region_fr) AS address_administrative_area_level_1_region_fr,
-    COALESCE(members_activated_and_created.address_administrative_area_level_2_department_fr, conversations.address_administrative_area_level_2_department_fr) AS address_administrative_area_level_2_department_fr,
-    COALESCE(members_activated_and_created.address_city_fr, conversations.address_city_fr) AS address_city_fr,
-    COALESCE(members_activated_and_created.address_postal_code, conversations.address_postal_code) AS address_postal_code,
+    COALESCE(members_activated_and_created.ambassador_company_name, conversations.ambassador_company_name, replies.ambassador_company_name) AS ambassador_company_name,
+    COALESCE(members_activated_and_created.company_sector_name, conversations.company_sector_name, replies.company_sector_name) AS company_sector_name,
+    COALESCE(members_activated_and_created.address_country, conversations.address_country, replies.address_country) AS address_country,
+    COALESCE(members_activated_and_created.address_administrative_area_level_1_region_fr, conversations.address_administrative_area_level_1_region_fr, replies.address_administrative_area_level_1_region_fr) AS address_administrative_area_level_1_region_fr,
+    COALESCE(members_activated_and_created.address_administrative_area_level_2_department_fr, conversations.address_administrative_area_level_2_department_fr, replies.address_administrative_area_level_2_department_fr) AS address_administrative_area_level_2_department_fr,
+    COALESCE(members_activated_and_created.address_city_fr, conversations.address_city_fr, replies.address_city_fr) AS address_city_fr,
+    COALESCE(members_activated_and_created.address_postal_code, conversations.address_postal_code, replies.address_postal_code) AS address_postal_code,
     nuida_appointments,
     new_members_created,
     new_members_activated,
@@ -72,6 +72,7 @@ FULL OUTER JOIN
     {{ ref('int__marketplace__members_with_conversations') }} AS conversations
     ON members_activated_and_created.measured_at = conversations.conversation_initiated_at
     AND members_activated_and_created.member_primary_type = conversations.member_primary_type
+    AND members_activated_and_created.member_secondary_type = conversations.member_secondary_type
     AND members_activated_and_created.ambassador_company_name = conversations.ambassador_company_name
     AND members_activated_and_created.company_sector_name = conversations.company_sector_name
     AND members_activated_and_created.address_country = conversations.address_country
@@ -83,6 +84,7 @@ FULL OUTER JOIN
     {{ ref('int__marketplace__members_with_conversations_replied') }} AS replies
     ON members_activated_and_created.measured_at = replies.conversation_replied_at
     AND members_activated_and_created.member_primary_type = replies.member_primary_type
+    AND members_activated_and_created.member_secondary_type = replies.member_secondary_type
     AND members_activated_and_created.ambassador_company_name = replies.ambassador_company_name
     AND members_activated_and_created.company_sector_name = replies.company_sector_name
     AND members_activated_and_created.address_country = replies.address_country

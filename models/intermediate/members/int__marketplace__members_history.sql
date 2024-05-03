@@ -1,6 +1,5 @@
 {{ config(materialized='table') }}
 
-
 SELECT
     seeker_id,
     user_id,
