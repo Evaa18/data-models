@@ -14,6 +14,7 @@ WITH members_activated_and_created AS (
         address_administrative_area_level_2_department_fr,
         address_city_fr,
         address_postal_code,
+        nuida_appointments,
         COUNT(DISTINCT
             IF(
                 member_is_created,
@@ -36,6 +37,7 @@ WITH members_activated_and_created AS (
 target AS (
     SELECT
         targeted_at,
+        member_primary_type,
         member_secondary_type,
         MIN(target_value__created_members) AS target_value__created_members
     FROM
@@ -45,8 +47,8 @@ target AS (
 
 SELECT
     COALESCE(measured_at, conversation_initiated_at, target.targeted_at) AS measured_at,
-    COALESCE(members_activated_and_created.member_primary_type, conversations.member_primary_type) AS member_primary_type,
-    COALESCE(members_activated_and_created.member_secondary_type, target.member_secondary_type) AS member_secondary_type,
+    COALESCE(members_activated_and_created.member_primary_type, conversations.member_primary_type, target.member_primary_type) AS member_primary_type,
+    COALESCE(members_activated_and_created.member_secondary_type, target.member_secondary_type, target.member_secondary_type) AS member_secondary_type,
     member_activation,
     member_affiliation,
     COALESCE(members_activated_and_created.ambassador_company_name, conversations.ambassador_company_name) AS ambassador_company_name,
@@ -56,6 +58,7 @@ SELECT
     COALESCE(members_activated_and_created.address_administrative_area_level_2_department_fr, conversations.address_administrative_area_level_2_department_fr) AS address_administrative_area_level_2_department_fr,
     COALESCE(members_activated_and_created.address_city_fr, conversations.address_city_fr) AS address_city_fr,
     COALESCE(members_activated_and_created.address_postal_code, conversations.address_postal_code) AS address_postal_code,
+    nuida_appointments,
     new_members_created,
     new_members_activated,
     seekers_contacting,
@@ -90,4 +93,5 @@ FULL OUTER JOIN
 FULL OUTER JOIN
     target
     ON DATE(members_activated_and_created.measured_at) = target.targeted_at
+    AND members_activated_and_created.member_primary_type = target.member_primary_type
     AND members_activated_and_created.member_secondary_type = target.member_secondary_type

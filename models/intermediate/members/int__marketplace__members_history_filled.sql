@@ -25,6 +25,18 @@ soft_deleted_members AS (
         {{ ref('base__marketplace__users') }} AS users
         USING(user_id)
     GROUP BY ALL
+),
+
+nuida_appointements AS (
+    SELECT
+        seeker_id,
+        DATE(appointment_or_claim_created_on_platform_at) AS appointment_or_claim_created_on_platform_at,
+        COUNT(DISTINCT appointment_or_claim_id) AS nuida_appointments
+    FROM
+        {{ ref('int__marketplace__nuida_appointments') }}
+    WHERE
+        appointment_or_claim_is_nuida
+    GROUP BY ALL
 )
 
 SELECT
@@ -32,6 +44,7 @@ SELECT
     COALESCE(gap_fill_created_members.seeker_profile_created_at, DATE(activation.member_activated_at)) AS measured_at,
     gap_fill_created_members.* EXCEPT(seeker_id, seeker_profile_created_at),
     activation.user_id IS NOT NULL AS member_is_activated,
+    nuida_appointments,
     CASE
         WHEN incomplete_profile.seeker_id IS NOT NULL THEN 'member_profile_is_incomplete'
         WHEN soft_deleted_members.seeker_id IS NOT NULL THEN 'member_is_soft_deleted'
@@ -78,3 +91,7 @@ LEFT JOIN
     {{ ref('int__marketplace__ambassadors_history') }} AS published_ambassadors
     ON gap_fill_created_members.user_id = affiliation.user_id
     AND DATE(gap_fill_created_members.seeker_profile_created_at) = DATE(dbt_valid_from)
+LEFT JOIN
+    nuida_appointements
+    ON gap_fill_created_members.seeker_id = nuida_appointements.seeker_id
+    AND DATE(gap_fill_created_members.seeker_profile_created_at) = appointment_or_claim_created_on_platform_at

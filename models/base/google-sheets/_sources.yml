@@ -5,5 +5,7 @@ sources:
     schema: target_google_sheets
     database: mjg-data-models
     tables:
-      - name: target_members
+      - name: target_initiated_conversations
+      - name: target_created_members
+      - name: target_nuida_appointments
       - name: target_published_ambassadors

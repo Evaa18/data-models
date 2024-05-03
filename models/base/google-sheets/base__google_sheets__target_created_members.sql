@@ -3,16 +3,14 @@
 SELECT
     date AS targeted_at,
     CASE
-        WHEN audience LIKE '%graduate_student%' THEN 'graduate_student'
-        WHEN audience LIKE '%professional%' THEN 'in_activity'
-        WHEN audience LIKE '%junior_high_school_student%' THEN 'junior_high_school_student'
-        WHEN audience LIKE '%senior_high_school_student%' THEN 'senior_high_school_student'
-        WHEN audience LIKE '%school_teacher%' THEN 'school_teacher'
-    ELSE 'unsure'
+        WHEN primary_audience = 'affiliated_member' THEN 'affiliated_to_vocation_program'
+        ELSE primary_audience
+    END AS member_primary_type,
+    CASE
+        WHEN secondary_audience_ = 'ambassador_member' THEN 'member_also_published_as_ambassador'
+        ELSE secondary_audience_
     END AS member_secondary_type,
     SUM(objective_value) AS target_value__created_members
 FROM
-    {{ source('google-sheets', 'target_members') }}
-WHERE
-    type = 'created'
+    {{ source('google-sheets', 'target_created_members') }}
 GROUP BY ALL
