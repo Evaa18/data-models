@@ -6,7 +6,7 @@ WITH affiliation_members AS (
         users.user_id,
         seeker_profile_created_at,
         user_is_high_school_teacher,
-        user_situation,
+        users.user_situation,
         user_is_oriane_ambassador,
         user_is_france_travail_job_seeker,
         user_created_at,

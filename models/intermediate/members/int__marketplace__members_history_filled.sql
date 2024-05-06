@@ -37,6 +37,19 @@ nuida_appointements AS (
     WHERE
         appointment_or_claim_is_nuida
     GROUP BY ALL
+),
+
+ambassador_members AS (
+    SELECT
+        gap_fill_created_members.user_id,
+        DATE(seeker_profile_created_at) AS seeker_profile_created_at,
+        IF(ambassador_is_published IS NULL, FALSE, ambassador_is_published) AS ambassador_is_published
+    FROM
+        gap_fill_created_members
+    LEFT JOIN
+        {{ ref('int__marketplace__ambassadors_history_filled') }} AS ambassadors
+        ON gap_fill_created_members.user_id = ambassadors.user_id
+        AND DATE(gap_fill_created_members.seeker_profile_created_at) = DATE(dbt_valid_from)
 )
 
 SELECT
@@ -88,9 +101,9 @@ LEFT JOIN
     {{ ref('base__dbt_transformations__dim_seekers_participations') }} AS affiliation
     ON gap_fill_created_members.user_id = affiliation.user_id
 LEFT JOIN
-    {{ ref('int__marketplace__ambassadors_history') }} AS published_ambassadors
-    ON gap_fill_created_members.user_id = affiliation.user_id
-    AND DATE(gap_fill_created_members.seeker_profile_created_at) = DATE(dbt_valid_from)
+    ambassador_members
+    ON gap_fill_created_members.user_id = ambassador_members.user_id
+    AND DATE(gap_fill_created_members.seeker_profile_created_at) = ambassador_members.seeker_profile_created_at
 LEFT JOIN
     nuida_appointements
     ON gap_fill_created_members.seeker_id = nuida_appointements.seeker_id
