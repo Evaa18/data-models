@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: base__google_sheets__target_created_members
+    description: "Google sheet containing created members targets."
+    columns:
+      - name: targeted_at
+        description: '{{ doc("targeted_at") }}'
+      - name: member_primary_type
+        description: '{{ doc("member_primary_type") }}'
+      - name: member_secondary_type
+        description: '{{ doc("member_secondary_type") }}'
+      - name: target_value__created_members
+        description: '{{ doc("target_value__created_members") }}'
+
+  - name: base__google_sheets__target_initiated_conversations
+    description: "Google sheet containing initiated conversations targets."
+    columns:
+      - name: targeted_at
+        description: '{{ doc("targeted_at") }}'
+      - name: target_value__initiated_conversations
+        description: '{{ doc("target_value__initiated_conversations") }}'
+
+  - name: base__google_sheets__target_nuida_appointments
+    description: "Google sheet containing NUIDA appointments targets."
+    columns:
+      - name: targeted_at
+        description: '{{ doc("targeted_at") }}'
+      - name: target_value__nuida_appointments
+        description: '{{ doc("target_value__nuida_appointments") }}'
+
+  - name: base__google_sheets__target_published_ambassadors
+    description: "Google sheet containing published ambassadors targets."
+    columns:
+      - name: targeted_at
+        description: '{{ doc("targeted_at") }}'
+      - name: ambassador_classification
+        description: '{{ doc("ambassador_classification") }}'
+      - name: target_value__published_ambassadors
+        description: '{{ doc("target_value__published_ambassadors") }}'
