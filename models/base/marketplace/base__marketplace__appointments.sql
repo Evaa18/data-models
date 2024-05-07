@@ -5,7 +5,7 @@ SELECT
     professional_id AS ambassador_id,
     seeker_id,
     conversation_id,
-    appointment_claim_id AS appointment_requested_by_seeker_id,
+    appointment_claim_id AS appointment_claim_id,
     created_at AS appointment_created_on_platform_at,
     updated_at AS appointment_updated_at,
     appointments.from AS appointment_start_at,

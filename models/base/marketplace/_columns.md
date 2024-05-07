@@ -302,8 +302,16 @@ Denormalized timestamp that should indicate when the ambassador will either beco
 A copy of the timestamp of last iced up event.
 {% enddocs %}
 
+{% docs ambassador_warmup_started_at %}
+A copy of the timestamp of the last time the ambassador entered a warmup stage.
+{% enddocs %}
+
+{% docs ambassador_warmup_ended_at %}
+A copy of the timestamp of the last time the ambassador exited a warmup stage.
+{% enddocs %}
+
 {% docs ambassador_last_melted_at %}
-A copy of the timestamp of the last time the pro melted (= no longer iced up).
+The timestamp of the last time the pro melted (= no longer iced up).
 {% enddocs %}
 
 {% docs ambassador_invitation_email %}
@@ -394,7 +402,7 @@ Profile description that appears on the public ambassador page.
 Boolean taking the value true when the user has closed the how it works banner and does not want to show it again, false otherwise.
 {% enddocs %}
 
-{% docs ambassador_languages_for_exchanging_with_students %}
+{% docs ambassador_languages_for_exchanging_with_seekers %}
 List of languages the ambassador can use.
 {% enddocs %}
 
@@ -581,4 +589,236 @@ Boolean taking the value true when the conversation was invalidated following a 
 
 {% docs conversation_last_invalidated_reason %}
 Reason of last invalidation of the conversation.
+{% enddocs %}
+
+{% docs ambassador_crisis_id %}
+ID of the crisis.
+{% enddocs %}
+
+{% docs ambassador_crisis_created_at %}
+Timestamp of the creation of the row.
+{% enddocs %}
+
+{% docs ambassador_crisis_started_at %}
+Timestamp of the beggining of the crisis.
+{% enddocs %}
+
+{% docs ambassador_crisis_average_response_time_at_start_of_crisis %}
+Average response time of the ambassador at the beggining of the crisis.
+{% enddocs %}
+
+{% docs ambassador_crisis_level_cd %}
+Intensity of the crisis (orange or red).
+{% enddocs %}
+
+{% docs appointment_claim_id %}
+ID of the appointment claim.
+{% enddocs %}
+
+{% docs appointment_claim_created_on_platform_at %}
+Timestamp of the creation of the appointment claim by the seeker.
+{% enddocs %}
+
+{% docs appointment_claim_updated_at %}
+Timestamp of the update of the appointment claim by the seeker.
+{% enddocs %}
+
+{% docs appointment_claim_resolved_at %}
+Timestamp of the resolution of the appointment claim by the seeker.
+{% enddocs %}
+
+{% docs appointment_start_at %}
+Timestamp at which the appointment is alledged to have taken place started.
+{% enddocs %}
+
+{% docs appointment_end_at %}
+Timestamp by default one hour after appointment_start_at.
+{% enddocs %}
+
+{% docs appointment_type %}
+Type of appointment (video, phone, face_to_face).
+{% enddocs %}
+
+{% docs appointment_claim_status %}
+Status of the appointment (accepted, pending, refused).
+{% enddocs %}
+
+{% docs appointment_address %}
+ID of the address where the appointment takes place.
+{% enddocs %}
+
+{% docs appointment_meeting_place %}
+Autocompleted address value in case of face-to-face appointments.
+{% enddocs %}
+
+{% docs appointment_coordinates %}
+Autocompleted coordinates in case of face-to-face appointments.
+{% enddocs %}
+
+{% docs appointment_time_zone %}
+Timezone selected by the user.
+{% enddocs %}
+
+{% docs appointment_created_on_platform_at %}
+Timestamp at which the ambassador has eitherregistered the appointment on the platform, or accepted an appointment claim from a seeker.
+{% enddocs %}
+
+{% docs appointment_updated_at %}
+Timestamp at which appointment information was last updated.
+{% enddocs %}
+
+{% docs appointment_unbooked_at %}
+Timestamp at which one of the parties cancelled the appointment. Only when the appointment was cancelled before its expected appointment_start_at.
+{% enddocs %}
+
+{% docs appointment_last_invalidated_at %}
+Timestamp of the last invalidation.
+{% enddocs %}
+
+{% docs appointment_last_feedback_follow_up_sent_at %}
+Timestamp at which the last follow_up email was sent (asking for a feedback).
+{% enddocs %}
+
+{% docs appointment_general_status %}
+Summary of the status of the appointment gathered from the feedbacks of both the ambassador and the seeker.
+{% enddocs %}
+
+{% docs appointment_seeker_feedback_type %}
+Type of feedback given by the seeker.
+{% enddocs %}
+
+{% docs appointment_ambassador_feedback_type %}
+Type of feedback given by the ambassador.
+{% enddocs %}
+
+{% docs appointment_seeker_custom_cancellation_reason %}
+The explicit explanation of the cancellation when the seeker indicated "other" as the cancellation reason.
+{% enddocs %}
+
+{% docs appointment_ambassador_custom_cancellation_reason %}
+The explicit explanation of the cancellation when the ambassador indicated "other" as the cancellation reason.
+{% enddocs %}
+
+{% docs appointment_feedback_from_ambassador %}
+Feedback from the ambassador that can contain a review, an indication that the appointment did not take place, or be null when this information was not asked.
+{% enddocs %}
+
+{% docs appointment_feedback_from_seeker %}
+Feedback from the seeker that can contain a review, an indication that the appointment did not take place, or be null when this information was not asked.
+{% enddocs %}
+
+{% docs appointment_is_invalidated %}
+Boolean taking the value true when the appointment is invalidated, false otherwise.
+{% enddocs %}
+
+{% docs appointment_last_invalidated_reason %}
+Reason of the last invalidation.
+{% enddocs %}
+
+{% docs appointment_feedback_follow_ups %}
+List of all appointment follow up emails sent.
+{% enddocs %}
+
+{% docs seeker_profile_created_at %}
+Timestamp of the creation of the seeker profile.
+{% enddocs %}
+
+{% docs seeker_updated_at %}
+Timestamp of the last update of the document.
+{% enddocs %}
+
+{% docs seeker_profile_first_completed_at %}
+Timestmap of when the profile was first completed.
+{% enddocs %}
+
+{% docs seeker_profile_last_edited_at %}
+Timestmap of when the profile was last edited.
+{% enddocs %}
+
+{% docs seeker_last_soft_deleted_at %}
+Timestamp of last soft deletion. Nulled after undeletion.
+{% enddocs %}
+
+{% docs seeker_anonymized_at %}
+Timestamp of anonymization.
+{% enddocs %}
+
+{% docs seeker_type %}
+Type of seeker.
+{% enddocs %}
+
+{% docs seeker_educations %}
+List of the seeker's educations.
+{% enddocs %}
+
+{% docs seeker_meeting_place_address %}
+Autocompleted address value.
+{% enddocs %}
+
+{% docs seeker_meeting_place_coordinates %}
+Autocompleted coordinates value.
+{% enddocs %}
+
+{% docs seeker_meeting_place_address_dataset %}
+The complete address dataset of the seeker.
+{% enddocs %}
+
+{% docs seeker_normalized_phone %}
+Phone number with international prefix.
+{% enddocs %}
+
+{% docs seeker_denormalized_appointment_reviews %}
+A copy of appointment reviews validated by the ambassador.
+{% enddocs %}
+
+{% docs seeker_description %}
+Presentation of the seeker.
+{% enddocs %}
+
+{% docs seeker_graduation_year %}
+Graduation year.
+{% enddocs %}
+
+{% docs seeker_is_profile_completed %}
+Boolean taking the value true when the profile is completed, false otherwise.
+{% enddocs %}
+
+{% docs seeker_is_subscribed_to_gatling %}
+Boolean taking the value true when the seeker agreed to receive gatling emails, false otherwise.
+{% enddocs %}
+
+{% docs seeker_denormalized_average_rating_of_first_question %}
+The current rating (or average if multiple questions) of the seeker aggregated from all reviewed appointments first question answer.
+{% enddocs %}
+
+{% docs seeker_replied_conversations_count_cache %}
+A copy of the number of replied conversations.
+{% enddocs %}
+
+{% docs seeker_denormalized_is_involved_in_a_fdr %}
+Boolean taking the value true is the seeker is or has been affiliated to at least one FDR, false otherwise.
+{% enddocs %}
+
+{% docs seeker_denormalized_confirmed_appointment_with_ambassador_review_count %}
+A copy of the number of the appointments where the ambassador indicated the appointment took place and left a semi-public review.
+{% enddocs %}
+
+{% docs seeker_denormalized_confirmed_appointment_count %}
+A copy of the number of the appointments where the professional indicated the appointment took place.
+{% enddocs %}
+
+{% docs seeker_denormalized_appointments_per_month %}
+A copy of a list of appointments per month.
+{% enddocs %}
+
+{% docs seeker_denormalized_referrals_initiated_count %}
+A copy of the number of referred users (any type) that registered following an invitation from this user.
+{% enddocs %}
+
+{% docs seeker_denormalized_unique_profile_views_count %}
+A denormalized version of the unique ambassador profile view.
+{% enddocs %}
+
+{% docs seeker_last_mission_accomplished %}
+ID of the last mission accomplished on the platform.
 {% enddocs %}

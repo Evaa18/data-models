@@ -49,7 +49,7 @@ SELECT
     position AS ambassador_job_title,
     description AS ambassador_description,
     hide_how_it_works AS ambassador_is_how_it_works_banner_hidden,
-    languages AS ambassador_languages_for_exchanging_with_students,
+    languages AS ambassador_languages_for_exchanging_with_seekers,
     published AS ambassador_is_published,
     last_publication_request_utm AS ambassador_last_publication_request_utm,
     promotions AS ambassador_promotions,

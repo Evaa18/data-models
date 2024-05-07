@@ -66,7 +66,7 @@ red_crisis_ambassadors AS (
         DATE(ambassador_crisis_started_at) AS ambassador_crisis_started_at,
         DATE(ambassador_crisis_ended_at) AS ambassador_crisis_ended_at
     FROM
-        {{ ref('base__marketplace__ambassador_crisis') }}
+        {{ ref('base__marketplace__ambassador_crises') }}
     WHERE
         ambassador_crisis_level_cd = 'red'
         AND ambassador_crisis_started_at IS NOT NULL

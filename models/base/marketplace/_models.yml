@@ -11,6 +11,8 @@ models:
           - not_null
       - name: google_place_id
         description: '{{ doc("google_place_id") }}'
+      - name: address_created_at
+        description: '{{ doc("address_created_at") }}'
       - name: address_completed_with_google_places_at
         description: '{{ doc("address_completed_with_google_places_at") }}'
       - name: address_formatted_fr
@@ -37,6 +39,27 @@ models:
         description: '{{ doc("address_postal_code") }}'
       - name: address_political_fr
         description: '{{ doc("address_political_fr") }}'
+
+  - name: base__marketplace__ambassador_crises
+    description: "Information around the crises that ambassadors can go through"
+    columns:
+      - name: ambassador_crisis_id
+        description: '{{ doc("ambassador_crisis_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: ambassador_id
+        description: '{{ doc("ambassador_id") }}'
+        tests:
+          - not_null
+      - name: ambassador_crisis_created_at
+        description: '{{ doc("ambassador_crisis_created_at") }}'
+      - name: ambassador_crisis_started_at
+        description: '{{ doc("ambassador_crisis_started_at") }}'
+      - name: ambassador_crisis_average_response_time_at_start_of_crisis
+        description: '{{ doc("ambassador_crisis_average_response_time_at_start_of_crisis") }}'
+      - name: ambassador_crisis_level_cd
+        description: '{{ doc("ambassador_crisis_level_cd") }}'
 
   - name: base__marketplace__ambassadors
     description: "Ambassadors accounts. Contains Mentors, Ambassadors, and VIPs."
@@ -107,6 +130,10 @@ models:
         description: '{{ doc("ambassador_becomes_available_or_iced_up_at") }}'
       - name: ambassador_last_iced_up_at
         description: '{{ doc("ambassador_last_iced_up_at") }}'
+      - name: ambassador_warmup_started_at
+        description: '{{ doc("ambassador_warmup_started_at") }}'
+      - name: ambassador_warmup_ended_at
+        description: '{{ doc("ambassador_warmup_ended_at") }}'
       - name: ambassador_last_melted_at
         description: '{{ doc("ambassador_last_melted_at") }}'
       - name: ambassador_invitation_email
@@ -159,8 +186,8 @@ models:
         description: '{{ doc("ambassador_description") }}'
       - name: ambassador_is_how_it_works_banner_hidden
         description: '{{ doc("ambassador_is_how_it_works_banner_hidden") }}'
-      - name: ambassador_languages_for_exchanging_with_students
-        description: '{{ doc("ambassador_languages_for_exchanging_with_students") }}'
+      - name: ambassador_languages_for_exchanging_with_seekers
+        description: '{{ doc("ambassador_languages_for_exchanging_with_seekers") }}'
       - name: ambassador_is_published
         description: '{{ doc("ambassador_is_published") }}'
       - name: ambassador_last_publication_request_utm
@@ -188,8 +215,173 @@ models:
       - name: ambassador_publication_request_completion_percentage
         description: '{{ doc("ambassador_publication_request_completion_percentage") }}'
 
+  - name: base__marketplace__appointment_claims
+    description: "Information the appointment claims made by seekers."
+    columns:
+      - name: appointment_claim_id
+        description: '{{ doc("appointment_claim_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: ambassador_id
+        description: '{{ doc("ambassador_id") }}'
+        tests:
+          - not_null
+      - name: seeker_id
+        description: '{{ doc("seeker_id") }}'
+        tests:
+          - not_null
+      - name: conversation_id
+        description: '{{ doc("conversation_id") }}'
+      - name: appointment_claim_created_on_platform_at
+        description: '{{ doc("appointment_claim_created_on_platform_at") }}'
+      - name: appointment_claim_updated_at
+        description: '{{ doc("appointment_claim_updated_at") }}'
+      - name: appointment_claim_resolved_at
+        description: '{{ doc("appointment_claim_resolved_at") }}'
+      - name: appointment_start_at
+        description: '{{ doc("appointment_start_at") }}'
+      - name: appointment_end_at
+        description: '{{ doc("appointment_end_at") }}'
+      - name: appointment_type
+        description: '{{ doc("appointment_type") }}'
+      - name: appointment_claim_status
+        description: '{{ doc("appointment_claim_status") }}'
+      - name: appointment_address
+        description: '{{ doc("appointment_address") }}'
+      - name: appointment_meeting_place
+        description: '{{ doc("appointment_meeting_place") }}'
+        tests:
+          - not_null:
+              where: >
+                appointment_type = 'face_to_face'
+                AND created_on_platform_at > '2017-11-04'
+      - name: appointment_coordinates
+        description: '{{ doc("appointment_coordinates") }}'
+        tests:
+          - not_null:
+              where: appointment_type = 'face_to_face'
+      - name: appointment_time_zone
+        description: '{{ doc("appointment_time_zone") }}'
+
+  - name: base__marketplace__appointment
+    description: "Information around the appointments registered on the platform by an ambassador."
+    columns:
+      - name: appointment_id
+        description: '{{ doc("appointment_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: ambassador_id
+        description: '{{ doc("ambassador_id") }}'
+        tests:
+          - not_null
+      - name: seeker_id
+        description: '{{ doc("seeker_id") }}'
+        tests:
+          - not_null
+      - name: conversation_id
+        description: '{{ doc("conversation_id") }}'
+        tests:
+          - not_null
+      - name: appointment_claim_id
+        description: '{{ doc("appointment_claim_id") }}'
+      - name: appointment_created_on_platform_at
+        description: '{{ doc("appointment_created_on_platform_at") }}'
+      - name: appointment_updated_at
+        description: '{{ doc("appointment_updated_at") }}'
+      - name: appointment_start_at
+        description: '{{ doc("appointment_start_at") }}'
+      - name: appointment_end_at
+        description: '{{ doc("appointment_end_at") }}'
+      - name: appointment_unbooked_at
+        description: '{{ doc("appointment_unbooked_at") }}'
+      - name: appointment_last_invalidated_at
+        description: '{{ doc("appointment_last_invalidated_at") }}'
+      - name: appointment_last_feedback_follow_up_sent_at
+        description: '{{ doc("appointment_last_feedback_follow_up_sent_at") }}'
+      - name: appointment_type
+        description: '{{ doc("appointment_type") }}'
+      - name: appointment_address
+        description: '{{ doc("appointment_address") }}'
+      - name: appointment_meeting_place
+        description: '{{ doc("appointment_meeting_place") }}'
+        tests:
+          - not_null:
+              where: appointment_type = 'face_to_face'
+      - name: appointment_coordinates
+        description: '{{ doc("appointment_coordinates") }}'
+        tests:
+          - not_null:
+              where: appointment_type = 'face_to_face'
+      - name: appointment_time_zone
+        description: '{{ doc("appointment_time_zone") }}'
+      - name: appointment_general_status
+        description: '{{ doc("appointment_general_status") }}'
+        tests:
+          - accepted_values:
+              values:
+                - unbooked
+                - upcoming_or_pending_review
+                - cancelled
+                - took_place
+                - conflict
+                - both_forgot_to_go
+                - rescheduled
+                - stood_up_by_student
+                - stood_up_by_professional
+      - name: appointment_seeker_feedback_type
+        description: '{{ doc("appointment_seeker_feedback_type") }}'
+        tests:
+          - accepted_values:
+              values:
+                - unbooked
+                - awaiting_review
+                - took_place
+                - cancelled
+                - did_not_show_up
+                - forgot_to_go
+                - rescheduled
+                - was_not_scheduled
+                - did_not_take_place_custom_reason
+      - name: appointment_ambassador_feedback_type
+        description: '{{ doc("appointment_ambassador_feedback_type") }}'
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - unbooked
+                - awaiting_review
+                - took_place
+                - cancelled
+                - did_not_show_up
+                - forgot_to_go
+                - rescheduled
+                - was_not_scheduled
+                - did_not_take_place_custom_reason
+      - name: appointment_seeker_custom_cancellation_reason
+        description: '{{ doc("appointment_seeker_custom_cancellation_reason") }}'
+        tests:
+          - not_null:
+              where: student_feedback_type = 'did_not_take_place_custom_reason'
+      - name: appointment_ambassador_custom_cancellation_reason
+        description: '{{ doc("appointment_ambassador_custom_cancellation_reason") }}'
+        tests:
+          - not_null:
+              where: professional_feedback_type = 'did_not_take_place_custom_reason'
+      - name: appointment_feedback_from_ambassador
+        description: '{{ doc("appointment_feedback_from_ambassador") }}'
+      - name: appointment_feedback_from_seeker
+        description: '{{ doc("appointment_feedback_from_seeker") }}'
+      - name: appointment_is_invalidated
+        description: '{{ doc("appointment_is_invalidated") }}'
+      - name: appointment_last_invalidated_reason
+        description: '{{ doc("appointment_last_invalidated_reason") }}'
+      - name: appointment_feedback_follow_ups
+        description: '{{ doc("appointment_feedback_follow_ups") }}'
+
   - name: base__marketplace__company_sectors
-    description: "Model of all company sectors based on the LinkedIn classification"
+    description: "Model of all company sectors based on the LinkedIn classification."
     columns:
       - name: company_sector_id
         description: '{{ doc("company_sector_id") }}'
@@ -208,10 +400,6 @@ models:
         description: '{{ doc("company_sector_linkedin_code") }}'
       - name: company_sector_hidden_from_search
         description: '{{ doc("company_sector_hidden_from_search") }}'
-
-
-
-
 
   - name: base__marketplace__conversations
     description: "Model of all conversations with an ambassador initiated by a seeker. Often abbreviated CI (conversation initiated)"
@@ -306,12 +494,70 @@ models:
       - name: conversation_last_invalidated_reason
         description: '{{ doc("conversation_last_invalidated_reason") }}'
 
-
-
-
-
-
-
+  - name: base__marketplace__seekers
+    description: "Information the seekers."
+    columns:
+      - name: seeker_id
+        description: '{{ doc("seeker_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: user_id
+        description: '{{ doc("user_id") }}'
+        tests:
+          - not_null
+      - name: seeker_profile_created_at
+        description: '{{ doc("seeker_profile_created_at") }}'
+      - name: seeker_updated_at
+        description: '{{ doc("seeker_updated_at") }}'
+      - name: seeker_profile_first_completed_at
+        description: '{{ doc("seeker_profile_first_completed_at") }}'
+      - name: seeker_profile_last_edited_at
+        description: '{{ doc("seeker_profile_last_edited_at") }}'
+      - name: seeker_last_soft_deleted_at
+        description: '{{ doc("seeker_last_soft_deleted_at") }}'
+      - name: seeker_anonymized_at
+        description: '{{ doc("seeker_anonymized_at") }}'
+      - name: seeker_type
+        description: '{{ doc("seeker_type") }}'
+      - name: seeker_educations
+        description: '{{ doc("seeker_educations") }}'
+      - name: seeker_meeting_place_address
+        description: '{{ doc("seeker_meeting_place_address") }}'
+      - name: seeker_meeting_place_coordinates
+        description: '{{ doc("seeker_meeting_place_coordinates") }}'
+      - name: seeker_meeting_place_address_dataset
+        description: '{{ doc("seeker_meeting_place_address_dataset") }}'
+      - name: seeker_normalized_phone
+        description: '{{ doc("seeker_normalized_phone") }}'
+      - name: seeker_denormalized_appointment_reviews
+        description: '{{ doc("seeker_denormalized_appointment_reviews") }}'
+      - name: seeker_description
+        description: '{{ doc("seeker_description") }}'
+      - name: seeker_graduation_year
+        description: '{{ doc("seeker_graduation_year") }}'
+      - name: seeker_is_profile_completed
+        description: '{{ doc("seeker_is_profile_completed") }}'
+      - name: seeker_is_subscribed_to_gatling
+        description: '{{ doc("seeker_is_subscribed_to_gatling") }}'
+      - name: seeker_denormalized_average_rating_of_first_question
+        description: '{{ doc("seeker_denormalized_average_rating_of_first_question") }}'
+      - name: seeker_replied_conversations_count_cache
+        description: '{{ doc("seeker_replied_conversations_count_cache") }}'
+      - name: seeker_denormalized_is_involved_in_a_fdr
+        description: '{{ doc("seeker_denormalized_is_involved_in_a_fdr") }}'
+      - name: seeker_denormalized_confirmed_appointment_with_ambassador_review_count
+        description: '{{ doc("seeker_denormalized_confirmed_appointment_with_ambassador_review_count") }}'
+      - name: seeker_denormalized_confirmed_appointment_count
+        description: '{{ doc("seeker_denormalized_confirmed_appointment_count") }}'
+      - name: seeker_denormalized_appointments_per_month
+        description: '{{ doc("seeker_denormalized_appointments_per_month") }}'
+      - name: seeker_denormalized_referrals_initiated_count
+        description: '{{ doc("seeker_denormalized_referrals_initiated_count") }}'
+      - name: seeker_denormalized_unique_profile_views_count
+        description: '{{ doc("seeker_denormalized_unique_profile_views_count") }}'
+      - name: seeker_last_mission_accomplished
+        description: '{{ doc("seeker_last_mission_accomplished") }}'
 
   - name: base__marketplace__users
     description: "Users accounts."
@@ -329,6 +575,8 @@ models:
         description: '{{ doc("france_travail_id") }}'
         tests:
           - unique
+      - name: desired_meeting_address_id
+        description: '{{ doc("desired_meeting_address_id") }}'
       - name: widget_source_id
         description: '{{ doc("widget_source_id") }}'
       - name: user_created_at
@@ -337,6 +585,8 @@ models:
         description: '{{ doc("user_updated_at") }}'
       - name: user_soft_deleted_at
         description: '{{ doc("user_soft_deleted_at") }}'
+      - name: user_anonymized_at
+        description: '{{ doc("user_anonymized_at") }}'
       - name: user_cache_last_active_at
         description: '{{ doc("user_cache_last_active_at") }}'
       - name: user_reset_password_sent_at
