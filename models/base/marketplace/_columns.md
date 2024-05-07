@@ -295,7 +295,7 @@ Timestamp of the last unrestriction.
 {% enddocs %}
 
 {% docs ambassador_becomes_available_or_iced_up_at %}
-Denormalized timestamp that should indicate when the ambassador will either becomes available or iced up following interaction failures
+Denormalized timestamp that should indicate when the ambassador will either becomes available or iced up following interaction failures.
 {% enddocs %}
 
 {% docs ambassador_last_iced_up_at %}

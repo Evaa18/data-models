@@ -22,6 +22,18 @@ Boolean taking the value true when they are hibernated, false otherwise.
 Boolean taking the value true when they are soft deleted, false otherwise.
 {% enddocs %}
 
+{% docs ambassador_latest_crisis_started_at %}
+Denormalized timestamp at which the latest crisis started.
+{% enddocs %}
+
+{% docs ambassador_last_unpublished_at %}
+Timestamp at which the ambassador was last unpublished. If the profile is republished afterwards, this field is not nulled and holds the previous value.
+{% enddocs %}
+
+{% docs ambassador_last_invalidated_at %}
+Timestamp of the last invalidation.
+{% enddocs %}
+
 {% docs dbt_updated_at %}
 Timestamp of the last time the snapshot was updated for the row.
 {% enddocs %}
@@ -32,4 +44,28 @@ Timestamp of the first time time the row is valid.
 
 {% docs dbt_valid_to %}
 Timestamp of the last time time the row is valid.
+{% enddocs %}
+
+{% docs user_is_france_travail_job_seeker %}
+Boolean taking the value true if the user belongs to at least one program of France Travail Organization in Vocation.
+{% enddocs %}
+
+{% docs last_program_end_at %}
+Timestamp of the end date of the last program the user was involved in.
+{% enddocs %}
+
+{% docs user_is_currently_involved_in_a_fdr %}
+Boolean taking the value true if the user is currently involved in an active FDR, false otherwise.
+{% enddocs %}
+
+{% docs user_is_all_time_involved_in_a_fdr %}
+Boolean taking the value true if the user has ever been involved in an FDR, false otherwise.
+{% enddocs %}
+
+{% docs nb_of_associated_programs %}
+Number of affiliated programs the user has been involved in.
+{% enddocs %}
+
+{% docs program_names %}
+Name of the affiliated programs the user has been involved in.
 {% enddocs %}
