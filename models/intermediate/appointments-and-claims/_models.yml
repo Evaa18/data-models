@@ -1,0 +1,121 @@
+version: 2
+
+models:
+  - name: int__marketplace__appointments_and_claims
+    description: "Model gathering information about all appointments and all pending claims."
+    columns:
+      - name: appointment_or_claim_id
+        description: '{{ doc("appointment_or_claim_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: ambassador_id
+        description: '{{ doc("ambassador_id") }}'
+        tests:
+          - not_null
+      - name: seeker_id
+        description: '{{ doc("seeker_id") }}'
+        tests:
+          - not_null
+      - name: conversation_id
+        description: '{{ doc("conversation_id") }}'
+      - name: appointment_or_claim_created_on_platform_at
+        description: '{{ doc("appointment_or_claim_created_on_platform_at") }}'
+      - name: appointment_or_claim_updated_at
+        description: '{{ doc("appointment_or_claim_updated_at") }}'
+      - name: appointment_start_at
+        description: '{{ doc("appointment_start_at") }}'
+      - name: appointment_unbooked_at
+        description: '{{ doc("appointment_unbooked_at") }}'
+      - name: appointment_last_invalidated_at
+        description: '{{ doc("appointment_last_invalidated_at") }}'
+      - name: appointment_or_claim
+        description: '{{ doc("appointment_or_claim") }}'
+      - name: appointment_type
+        description: '{{ doc("appointment_type") }}'
+      - name: appointment_time_zone
+        description: '{{ doc("appointment_time_zone") }}'
+      - name: appointment_address
+        description: '{{ doc("appointment_address") }}'
+      - name: appointment_meeting_place
+        description: '{{ doc("appointment_meeting_place") }}'
+      - name: appointment_or_claim_general_status
+        description: '{{ doc("appointment_or_claim_general_status") }}'
+      - name: appointment_or_claim_seeker_feedback_type
+        description: '{{ doc("appointment_or_claim_seeker_feedback_type") }}'
+      - name: appointment_or_claim_ambassador_feedback_type
+        description: '{{ doc("appointment_or_claim_ambassador_feedback_type") }}'
+      - name: appointment_feedback_from_ambassador
+        description: '{{ doc("appointment_feedback_from_ambassador") }}'
+      - name: appointment_feedback_from_seeker
+        description: '{{ doc("appointment_feedback_from_seeker") }}'
+      - name: appointment_is_invalidated
+        description: '{{ doc("appointment_is_invalidated") }}'
+      - name: appointment_last_invalidated_reason
+        description: '{{ doc("appointment_last_invalidated_reason") }}'
+
+  - name: int__marketplace__nuida_appointments_target
+    description: "Model containing NUIDA appointments details because Tableau cannot query directly the base model."
+    columns:
+      - name: targeted_at
+        description: '{{ doc("targeted_at") }}'
+        tests:
+          - unique
+          - not_null
+      - name: target_value__nuida_appointments
+        description: '{{ doc("target_value__nuida_appointments") }}'
+
+  - name: int__marketplace__nuida_appointments
+    description: "Model indicating whether an appointment or pending claim qualifies as a NUIDA appointment."
+    columns:
+      - name: appointment_or_claim_id
+        description: '{{ doc("appointment_or_claim_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: ambassador_id
+        description: '{{ doc("ambassador_id") }}'
+        tests:
+          - not_null
+      - name: seeker_id
+        description: '{{ doc("seeker_id") }}'
+        tests:
+          - not_null
+      - name: conversation_id
+        description: '{{ doc("conversation_id") }}'
+      - name: appointment_or_claim_created_on_platform_at
+        description: '{{ doc("appointment_or_claim_created_on_platform_at") }}'
+      - name: appointment_or_claim_updated_at
+        description: '{{ doc("appointment_or_claim_updated_at") }}'
+      - name: appointment_start_at
+        description: '{{ doc("appointment_start_at") }}'
+      - name: appointment_unbooked_at
+        description: '{{ doc("appointment_unbooked_at") }}'
+      - name: appointment_last_invalidated_at
+        description: '{{ doc("appointment_last_invalidated_at") }}'
+      - name: appointment_or_claim
+        description: '{{ doc("appointment_or_claim") }}'
+      - name: appointment_type
+        description: '{{ doc("appointment_type") }}'
+      - name: appointment_time_zone
+        description: '{{ doc("appointment_time_zone") }}'
+      - name: appointment_address
+        description: '{{ doc("appointment_address") }}'
+      - name: appointment_meeting_place
+        description: '{{ doc("appointment_meeting_place") }}'
+      - name: appointment_or_claim_general_status
+        description: '{{ doc("appointment_or_claim_general_status") }}'
+      - name: appointment_or_claim_seeker_feedback_type
+        description: '{{ doc("appointment_or_claim_seeker_feedback_type") }}'
+      - name: appointment_or_claim_ambassador_feedback_type
+        description: '{{ doc("appointment_or_claim_ambassador_feedback_type") }}'
+      - name: appointment_feedback_from_ambassador
+        description: '{{ doc("appointment_feedback_from_ambassador") }}'
+      - name: appointment_feedback_from_seeker
+        description: '{{ doc("appointment_feedback_from_seeker") }}'
+      - name: appointment_is_invalidated
+        description: '{{ doc("appointment_is_invalidated") }}'
+      - name: appointment_last_invalidated_reason
+        description: '{{ doc("appointment_last_invalidated_reason") }}'
+      - name: appointment_or_claim_is_nuida
+        description: '{{ doc("appointment_or_claim_is_nuida") }}'
