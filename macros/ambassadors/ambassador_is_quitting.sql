@@ -1,11 +1,11 @@
 {% macro ambassador_is_quitting(soft_deleted, invalidated, restricted, published, hibernated, iced_up) -%}
-case
-    when {{soft_deleted}} = true then false
-    when {{invalidated}} = true then true
-    when {{restricted}} = true then false
-    when {{published}} = false then true
-    when {{hibernated}} = true then false
-    when {{iced_up}} = true then true
-    else true
-end
+CASE
+    WHEN {{soft_deleted}} = TRUE THEN FALSE
+    WHEN {{invalidated}} = TRUE THEN TRUE
+    WHEN {{restricted}} = TRUE THEN FALSE
+    WHEN {{published}} = FALSE THEN TRUE
+    WHEN {{hibernated}} = TRUE THEN FALSE
+    WHEN {{iced_up}} = TRUE THEN TRUE
+    ELSE TRUE
+END
 {%- endmacro %}
