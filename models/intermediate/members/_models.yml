@@ -1,0 +1,196 @@
+version: 2
+
+models:
+  - name: int__marketplace__members_activation
+    description: "Model gathering information about all members' first activation (either having at their first CI for seekers or have been published for the first time for ambassadors)."
+    columns:
+      - name: user_id
+        description: '{{ doc("user_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: seeker_id
+        description: '{{ doc("seeker_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: member_activated_at
+        description: '{{ doc("member_activated_at") }}'
+
+  - name: int__marketplace__members_history_filled
+    description: "Model for each day and by member gathering all information around members."
+    columns:
+      - name: seeker_id
+        description: '{{ doc("seeker_id") }}'
+        tests:
+          - not_null
+      - name: measured_at
+        description: '{{ doc("measured_at") }}'
+        tests:
+          - not_null
+      - name: user_id
+        description: '{{ doc("user_id") }}'
+        tests:
+          - not_null
+      - name: member_primary_type
+        description: '{{ doc("member_primary_type") }}'
+      - name: member_secondary_type
+        description: '{{ doc("member_secondary_type") }}'
+      - name: user_situation
+        description: '{{ doc("user_situation") }}'
+      - name: ambassador_company_name
+        description: '{{ doc("ambassador_company_name") }}'
+      - name: company_sector_name
+        description: '{{ doc("company_sector_name") }}'
+      - name: address_country
+        description: '{{ doc("address_country") }}'
+      - name: address_administrative_area_level_1_region_fr
+        description: '{{ doc("address_administrative_area_level_1_region_fr") }}'
+      - name: address_administrative_area_level_2_department_fr
+        description: '{{ doc("address_administrative_area_level_2_department_fr") }}'
+      - name: address_city_fr
+        description: '{{ doc("address_city_fr") }}'
+      - name: address_postal_code
+        description: '{{ doc("address_postal_code") }}'
+      - name: member_is_created
+        description: '{{ doc("member_is_created") }}'
+      - name: member_is_activated
+        description: '{{ doc("member_is_activated") }}'
+      - name: nuida_appointments
+        description: '{{ doc("nuida_appointments") }}'
+      - name: member_activation
+        description: '{{ doc("member_activation") }}'
+      - name: member_affiliation
+        description: '{{ doc("member_affiliation") }}'
+
+  - name: int__marketplace__members_history
+    description: "Model gathering all information around members."
+    columns:
+      - name: seeker_id
+        description: '{{ doc("seeker_id") }}'
+        tests:
+          - not_null
+      - name: seeker_profile_created_at
+        description: '{{ doc("seeker_profile_created_at") }}'
+        tests:
+          - not_null
+      - name: user_id
+        description: '{{ doc("user_id") }}'
+        tests:
+          - not_null
+      - name: member_primary_type
+        description: '{{ doc("member_primary_type") }}'
+      - name: user_situation
+        description: '{{ doc("user_situation") }}'
+      - name: ambassador_company_name
+        description: '{{ doc("ambassador_company_name") }}'
+      - name: company_sector_name
+        description: '{{ doc("company_sector_name") }}'
+      - name: address_country
+        description: '{{ doc("address_country") }}'
+      - name: address_administrative_area_level_1_region_fr
+        description: '{{ doc("address_administrative_area_level_1_region_fr") }}'
+      - name: address_administrative_area_level_2_department_fr
+        description: '{{ doc("address_administrative_area_level_2_department_fr") }}'
+      - name: address_city_fr
+        description: '{{ doc("address_city_fr") }}'
+      - name: address_postal_code
+        description: '{{ doc("address_postal_code") }}'
+      - name: member_is_created
+        description: '{{ doc("member_is_created") }}'
+
+  - name: int__marketplace__members_with_conversations_replied
+    description: "Model gathering by day all information around conversations replied that members receive."
+    columns:
+      - name: conversation_replied_at
+        description: '{{ doc("conversation_replied_at") }}'
+        tests:
+          - not_null
+      - name: member_primary_type
+        description: '{{ doc("member_primary_type") }}'
+      - name: member_secondary_type
+        description: '{{ doc("member_secondary_type") }}'
+      - name: user_situation
+        description: '{{ doc("user_situation") }}'
+      - name: ambassador_company_name
+        description: '{{ doc("ambassador_company_name") }}'
+      - name: company_sector_name
+        description: '{{ doc("company_sector_name") }}'
+      - name: address_country
+        description: '{{ doc("address_country") }}'
+      - name: address_administrative_area_level_1_region_fr
+        description: '{{ doc("address_administrative_area_level_1_region_fr") }}'
+      - name: address_administrative_area_level_2_department_fr
+        description: '{{ doc("address_administrative_area_level_2_department_fr") }}'
+      - name: address_city_fr
+        description: '{{ doc("address_city_fr") }}'
+      - name: address_postal_code
+        description: '{{ doc("address_postal_code") }}'
+      - name: seekers_replied_to
+        description: '{{ doc("seekers_replied_to") }}'
+      - name: conversations_replied
+        description: '{{ doc("conversations_replied") }}'
+
+  - name: int__marketplace__members_with_conversations
+    description: "Model gathering by day all information around conversations."
+    columns:
+      - name: conversation_initiated_at
+        description: '{{ doc("conversation_initiated_at") }}'
+        tests:
+          - not_null
+      - name: ambassador_company_name
+        description: '{{ doc("ambassador_company_name") }}'
+      - name: company_sector_name
+        description: '{{ doc("company_sector_name") }}'
+      - name: address_country
+        description: '{{ doc("address_country") }}'
+      - name: address_administrative_area_level_1_region_fr
+        description: '{{ doc("address_administrative_area_level_1_region_fr") }}'
+      - name: address_administrative_area_level_2_department_fr
+        description: '{{ doc("address_administrative_area_level_2_department_fr") }}'
+      - name: address_city_fr
+        description: '{{ doc("address_city_fr") }}'
+      - name: address_postal_code
+        description: '{{ doc("address_postal_code") }}'
+      - name: member_primary_type
+        description: '{{ doc("member_primary_type") }}'
+      - name: member_secondary_type
+        description: '{{ doc("member_secondary_type") }}'
+      - name: seekers_contacting
+        description: '{{ doc("seekers_contacting") }}'
+      - name: conversations_sent
+        description: '{{ doc("conversations_sent") }}'
+
+  - name: int__marketplace__members
+    description: "Model selecting all useful information around members."
+    columns:
+      - name: seeker_id
+        description: '{{ doc("seeker_id") }}'
+        tests:
+          - not_null
+      - name: user_id
+        description: '{{ doc("user_id") }}'
+        tests:
+          - not_null
+      - name: seeker_profile_created_at
+        description: '{{ doc("seeker_profile_created_at") }}'
+      - name: user_situation
+        description: '{{ doc("user_situation") }}'
+      - name: member_primary_type
+        description: '{{ doc("member_primary_type") }}'
+      - name: ambassador_company_name
+        description: '{{ doc("ambassador_company_name") }}'
+      - name: company_sector_name
+        description: '{{ doc("company_sector_name") }}'
+      - name: ambassador_job_title
+        description: '{{ doc("ambassador_job_title") }}'
+      - name: address_country
+        description: '{{ doc("address_country") }}'
+      - name: address_administrative_area_level_1_region_fr
+        description: '{{ doc("address_administrative_area_level_1_region_fr") }}'
+      - name: address_administrative_area_level_2_department_fr
+        description: '{{ doc("address_administrative_area_level_2_department_fr") }}'
+      - name: address_city_fr
+        description: '{{ doc("address_city_fr") }}'
+      - name: address_postal_code
+        description: '{{ doc("address_postal_code") }}'
