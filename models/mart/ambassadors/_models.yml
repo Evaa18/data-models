@@ -1,0 +1,74 @@
+version: 2
+
+models:
+  - name: mart__daily__ambassadors
+    description: "Model gathering for every day information about ambassadors."
+    columns:
+      - name: measured_at
+        description: '{{ doc("measured_at") }}'
+        tests:
+          - not_null
+      - name: ambassador_classification
+        description: '{{ doc("ambassador_classification") }}'
+      - name: ambassador_company_name
+        description: '{{ doc("ambassador_company_name") }}'
+      - name: company_sector_name
+        description: '{{ doc("company_sector_name") }}'
+      - name: address_country
+        description: '{{ doc("address_country") }}'
+      - name: address_administrative_area_level_1_region_fr
+        description: '{{ doc("address_administrative_area_level_1_region_fr") }}'
+      - name: address_administrative_area_level_2_department_fr
+        description: '{{ doc("address_administrative_area_level_2_department_fr") }}'
+      - name: address_city_fr
+        description: '{{ doc("address_city_fr") }}'
+      - name: address_postal_code
+        description: '{{ doc("address_postal_code") }}'
+      - name: new_ambassadors_first_disengaged_reason
+        description: '{{ doc("new_ambassadors_first_disengaged_reason") }}'
+      - name: nuida_appointments
+        description: '{{ doc("nuida_appointments") }}'
+      - name: ambassadors_published
+        description: '{{ doc("ambassadors_published") }}'
+      - name: ambassador_unpublished
+        description: '{{ doc("ambassador_unpublished") }}'
+      - name: ambassadors_visible
+        description: '{{ doc("ambassadors_visible") }}'
+      - name: ambassadors_available
+        description: '{{ doc("ambassadors_available") }}'
+      - name: ambassadors_unavailable
+        description: '{{ doc("ambassadors_unavailable") }}'
+      - name: ambassadors_disengaged
+        description: '{{ doc("ambassadors_disengaged") }}'
+      - name: ambassadors_iced_up
+        description: '{{ doc("ambassadors_iced_up") }}'
+      - name: ambassadors_soft_deleted
+        description: '{{ doc("ambassadors_soft_deleted") }}'
+      - name: ambassadors_restricted
+        description: '{{ doc("ambassadors_restricted") }}'
+      - name: ambassadors_invalidated
+        description: '{{ doc("ambassadors_invalidated") }}'
+      - name: conversations_received
+        description: '{{ doc("conversations_received") }}'
+      - name: ambassadors_contacted
+        description: '{{ doc("ambassadors_contacted") }}'
+      - name: conversations_replied
+        description: '{{ doc("conversations_replied") }}'
+      - name: ambassadors_replying
+        description: '{{ doc("ambassadors_replying") }}'
+      - name: new_ambassadors_published
+        description: '{{ doc("new_ambassadors_published") }}'
+      - name: new_ambassadors_unpublished
+        description: '{{ doc("new_ambassadors_unpublished") }}'
+      - name: new_ambassadors_iced_up
+        description: '{{ doc("new_ambassadors_iced_up") }}'
+      - name: new_ambassadors_soft_deleted
+        description: '{{ doc("new_ambassadors_soft_deleted") }}'
+      - name: new_ambassadors_restricted
+        description: '{{ doc("new_ambassadors_restricted") }}'
+      - name: new_ambassadors_invalidated
+        description: '{{ doc("new_ambassadors_invalidated") }}'
+      - name: new_ambassadors_disengaged
+        description: '{{ doc("new_ambassadors_disengaged") }}'
+      - name: target_value__published_ambassadors
+        description: '{{ doc("target_value__published_ambassadors") }}'

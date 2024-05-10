@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: mart__daily__members
+    description: "Model gathering for every day information about members."
+    columns:
+      - name: measured_at
+        description: '{{ doc("measured_at") }}'
+        tests:
+          - not_null
+      - name: member_primary_type
+        description: '{{ doc("member_primary_type") }}'
+      - name: member_secondary_type
+        description: '{{ doc("member_secondary_type") }}'
+      - name: member_activation
+        description: '{{ doc("member_activation") }}'
+      - name: member_affiliation
+        description: '{{ doc("member_affiliation") }}'
+      - name: ambassador_company_name
+        description: '{{ doc("ambassador_company_name") }}'
+      - name: company_sector_name
+        description: '{{ doc("company_sector_name") }}'
+      - name: address_country
+        description: '{{ doc("address_country") }}'
+      - name: address_administrative_area_level_1_region_fr
+        description: '{{ doc("address_administrative_area_level_1_region_fr") }}'
+      - name: address_administrative_area_level_2_department_fr
+        description: '{{ doc("address_administrative_area_level_2_department_fr") }}'
+      - name: address_city_fr
+        description: '{{ doc("address_city_fr") }}'
+      - name: address_postal_code
+        description: '{{ doc("address_postal_code") }}'
+      - name: nuida_appointments
+        description: '{{ doc("nuida_appointments") }}'
+      - name: new_members_created
+        description: '{{ doc("new_members_created") }}'
+      - name: new_members_activated
+        description: '{{ doc("new_members_activated") }}'
+      - name: seekers_contacting
+        description: '{{ doc("seekers_contacting") }}'
+      - name: conversations_sent
+        description: '{{ doc("conversations_sent") }}'
+      - name: seekers_replied_to
+        description: '{{ doc("seekers_replied_to") }}'
+      - name: ambassadors_unavailable
+        description: '{{ doc("ambassadors_unavailable") }}'
+      - name: conversations_replied
+        description: '{{ doc("conversations_replied") }}'
+      - name: target_value__created_members
+        description: '{{ doc("target_value__created_members") }}'
