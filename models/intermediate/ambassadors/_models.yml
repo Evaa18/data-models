@@ -1,0 +1,281 @@
+version: 2
+
+models:
+  - name: int__marketplace__ambassadors_history_filled
+    description: "Model for each day and by ambassador gathering all information around ambassadors."
+    columns:
+      - name: dbt_valid_from
+        description: '{{ doc("dbt_valid_from") }}'
+        tests:
+          - not_null
+      - name: ambassador_id
+        description: '{{ doc("ambassador_id") }}'
+        tests:
+          - not_null
+      - name: user_id
+        description: '{{ doc("user_id") }}'
+        tests:
+          - not_null
+      - name: ambassador_classification
+        description: '{{ doc("ambassador_classification") }}'
+      - name: ambassador_company_name
+        description: '{{ doc("ambassador_company_name") }}'
+      - name: company_sector_name
+        description: '{{ doc("company_sector_name") }}'
+      - name: ambassador_job_title
+        description: '{{ doc("ambassador_job_title") }}'
+      - name: address_country
+        description: '{{ doc("address_country") }}'
+      - name: address_administrative_area_level_1_region_fr
+        description: '{{ doc("address_administrative_area_level_1_region_fr") }}'
+      - name: address_administrative_area_level_2_department_fr
+        description: '{{ doc("address_administrative_area_level_2_department_fr") }}'
+      - name: address_city_fr
+        description: '{{ doc("address_city_fr") }}'
+      - name: address_postal_code
+        description: '{{ doc("address_postal_code") }}'
+      - name: ambassador_is_published
+        description: '{{ doc("ambassador_is_published") }}'
+      - name: ambassador_is_visible
+        description: '{{ doc("ambassador_is_visible") }}'
+      - name: ambassador_is_available
+        description: '{{ doc("ambassador_is_available") }}'
+      - name: ambassador_is_hibernated
+        description: '{{ doc("ambassador_is_hibernated") }}'
+      - name: ambassador_is_iced_up
+        description: '{{ doc("ambassador_is_iced_up") }}'
+      - name: ambassador_is_soft_deleted
+        description: '{{ doc("ambassador_is_soft_deleted") }}'
+      - name: nuida_appointments
+        description: '{{ doc("nuida_appointments") }}'
+      - name: ambassador_is_in_warm_up
+        description: '{{ doc("ambassador_is_in_warm_up") }}'
+      - name: ambassador_is_restricted
+        description: '{{ doc("ambassador_is_restricted") }}'
+      - name: ambassador_is_invalidated
+        description: '{{ doc("ambassador_is_invalidated") }}'
+      - name: ambassador_is_unpublished
+        description: '{{ doc("ambassador_is_unpublished") }}'
+      - name: ambassador_is_in_red_crisis
+        description: '{{ doc("ambassador_is_in_red_crisis") }}'
+      - name: ambassador_is_disengaged
+        description: '{{ doc("ambassador_is_disengaged") }}'
+
+  - name: int__marketplace__ambassadors_history
+    description: "Model gathering all information around ambassadors."
+    columns:
+      - name: dbt_valid_from
+        description: '{{ doc("dbt_valid_from") }}'
+        tests:
+          - not_null
+      - name: ambassador_id
+        description: '{{ doc("ambassador_id") }}'
+        tests:
+          - not_null
+      - name: user_id
+        description: '{{ doc("user_id") }}'
+        tests:
+          - not_null
+      - name: ambassador_classification
+        description: '{{ doc("ambassador_classification") }}'
+      - name: ambassador_company_name
+        description: '{{ doc("ambassador_company_name") }}'
+      - name: company_sector_name
+        description: '{{ doc("company_sector_name") }}'
+      - name: ambassador_job_title
+        description: '{{ doc("ambassador_job_title") }}'
+      - name: address_country
+        description: '{{ doc("address_country") }}'
+      - name: address_administrative_area_level_1_region_fr
+        description: '{{ doc("address_administrative_area_level_1_region_fr") }}'
+      - name: address_administrative_area_level_2_department_fr
+        description: '{{ doc("address_administrative_area_level_2_department_fr") }}'
+      - name: address_city_fr
+        description: '{{ doc("address_city_fr") }}'
+      - name: address_postal_code
+        description: '{{ doc("address_postal_code") }}'
+      - name: ambassador_is_published
+        description: '{{ doc("ambassador_is_published") }}'
+      - name: ambassador_is_visible
+        description: '{{ doc("ambassador_is_visible") }}'
+      - name: ambassador_is_available
+        description: '{{ doc("ambassador_is_available") }}'
+      - name: ambassador_is_hibernated
+        description: '{{ doc("ambassador_is_hibernated") }}'
+      - name: ambassador_is_iced_up
+        description: '{{ doc("ambassador_is_iced_up") }}'
+      - name: ambassador_is_soft_deleted
+        description: '{{ doc("ambassador_is_soft_deleted") }}'
+      - name: nuida_appointments
+        description: '{{ doc("nuida_appointments") }}'
+
+  - name: int__marketplace__ambassadors
+    description: "Model selecting all useful information around ambassadors."
+    columns:
+      - name: ambassador_id
+        description: '{{ doc("ambassador_id") }}'
+        tests:
+          - not_null
+      - name: user_id
+        description: '{{ doc("user_id") }}'
+        tests:
+          - not_null
+      - name: ambassador_classification
+        description: '{{ doc("ambassador_classification") }}'
+      - name: company_id
+        description: '{{ doc("company_id") }}'
+      - name: company_sector_id
+        description: '{{ doc("company_sector_id") }}'
+      - name: user_created_at
+        description: '{{ doc("user_created_at") }}'
+      - name: ambassador_first_published_at
+        description: '{{ doc("ambassador_first_published_at") }}'
+      - name: ambassador_company_name
+        description: '{{ doc("ambassador_company_name") }}'
+      - name: company_sector_name
+        description: '{{ doc("company_sector_name") }}'
+      - name: ambassador_job_title
+        description: '{{ doc("ambassador_job_title") }}'
+      - name: address_country
+        description: '{{ doc("address_country") }}'
+      - name: address_administrative_area_level_1_region_fr
+        description: '{{ doc("address_administrative_area_level_1_region_fr") }}'
+      - name: address_administrative_area_level_2_department_fr
+        description: '{{ doc("address_administrative_area_level_2_department_fr") }}'
+      - name: address_city_fr
+        description: '{{ doc("address_city_fr") }}'
+      - name: address_postal_code
+        description: '{{ doc("address_postal_code") }}'
+
+  - name: int__marketplace__contacted_ambassadors_reply
+    description: "Model per day around conversations replied by ambassadors."
+    columns:
+      - name: conversation_replied_at
+        description: '{{ doc("conversation_denormalized_ambassador_first_response_at") }}'
+        tests:
+          - not_null
+      - name: ambassador_classification
+        description: '{{ doc("ambassador_classification") }}'
+      - name: ambassador_company_name
+        description: '{{ doc("ambassador_company_name") }}'
+      - name: company_sector_name
+        description: '{{ doc("company_sector_name") }}'
+      - name: ambassador_job_title
+        description: '{{ doc("ambassador_job_title") }}'
+      - name: address_country
+        description: '{{ doc("address_country") }}'
+      - name: address_administrative_area_level_1_region_fr
+        description: '{{ doc("address_administrative_area_level_1_region_fr") }}'
+      - name: address_administrative_area_level_2_department_fr
+        description: '{{ doc("address_administrative_area_level_2_department_fr") }}'
+      - name: address_city_fr
+        description: '{{ doc("address_city_fr") }}'
+      - name: address_postal_code
+        description: '{{ doc("address_postal_code") }}'
+      - name: ambassadors_replying
+        description: '{{ doc("ambassadors_replying") }}'
+      - name: conversations_replied
+        description: '{{ doc("conversations_replied") }}'
+
+  - name: int__marketplace__contacted_ambassadors
+    description: "Model per day around ambassadors contacted by seekers."
+    columns:
+      - name: conversation_initiated_at
+        description: '{{ doc("conversation_initiated_at") }}'
+        tests:
+          - not_null
+      - name: ambassador_classification
+        description: '{{ doc("ambassador_classification") }}'
+      - name: ambassador_company_name
+        description: '{{ doc("ambassador_company_name") }}'
+      - name: company_sector_name
+        description: '{{ doc("company_sector_name") }}'
+      - name: ambassador_job_title
+        description: '{{ doc("ambassador_job_title") }}'
+      - name: address_country
+        description: '{{ doc("address_country") }}'
+      - name: address_administrative_area_level_1_region_fr
+        description: '{{ doc("address_administrative_area_level_1_region_fr") }}'
+      - name: address_administrative_area_level_2_department_fr
+        description: '{{ doc("address_administrative_area_level_2_department_fr") }}'
+      - name: address_city_fr
+        description: '{{ doc("address_city_fr") }}'
+      - name: address_postal_code
+        description: '{{ doc("address_postal_code") }}'
+      - name: ambassadors_contacted
+        description: '{{ doc("ambassadors_contacted") }}'
+      - name: conversations_received
+        description: '{{ doc("conversations_received") }}'
+
+  - name: int__marketplace__new_ambassadors_disengaged
+    description: "Model per day around ambassadors disengagement reasons."
+    columns:
+      - name: ambassador_id
+        description: '{{ doc("ambassador_id") }}'
+        tests:
+          - not_null
+      - name: dbt_valid_from
+        description: '{{ doc("dbt_valid_from") }}'
+        tests:
+          - not_null
+      - name: ambassador_classification
+        description: '{{ doc("ambassador_classification") }}'
+      - name: ambassador_company_name
+        description: '{{ doc("ambassador_company_name") }}'
+      - name: company_sector_name
+        description: '{{ doc("company_sector_name") }}'
+      - name: ambassador_job_title
+        description: '{{ doc("ambassador_job_title") }}'
+      - name: address_country
+        description: '{{ doc("address_country") }}'
+      - name: address_administrative_area_level_1_region_fr
+        description: '{{ doc("address_administrative_area_level_1_region_fr") }}'
+      - name: address_administrative_area_level_2_department_fr
+        description: '{{ doc("address_administrative_area_level_2_department_fr") }}'
+      - name: address_city_fr
+        description: '{{ doc("address_city_fr") }}'
+      - name: address_postal_code
+        description: '{{ doc("address_postal_code") }}'
+      - name: new_ambassadors_is_unpublished
+        description: '{{ doc("new_ambassadors_is_unpublished") }}'
+      - name: new_ambassadors_is_iced_up
+        description: '{{ doc("new_ambassadors_is_iced_up") }}'
+      - name: new_ambassadors_is_soft_deleted
+        description: '{{ doc("new_ambassadors_is_soft_deleted") }}'
+      - name: new_ambassadors_is_restricted
+        description: '{{ doc("new_ambassadors_is_restricted") }}'
+      - name: new_ambassadors_is_invalidated
+        description: '{{ doc("new_ambassadors_is_invalidated") }}'
+      - name: new_ambassadors_is_disengaged
+        description: '{{ doc("new_ambassadors_is_disengaged") }}'
+      - name: new_ambassadors_first_disengaged_reason
+        description: '{{ doc("new_ambassadors_first_disengaged_reason") }}'
+
+  - name: int__marketplace__new_ambassadors_published
+    description: "Model per day around ambassadors newly published."
+    columns:
+      - name: ambassador_first_published_at
+        description: '{{ doc("ambassador_first_published_at") }}'
+        tests:
+          - unique
+          - not_null
+      - name: ambassador_classification
+        description: '{{ doc("ambassador_classification") }}'
+      - name: ambassador_company_name
+        description: '{{ doc("ambassador_company_name") }}'
+      - name: company_sector_name
+        description: '{{ doc("company_sector_name") }}'
+      - name: ambassador_job_title
+        description: '{{ doc("ambassador_job_title") }}'
+      - name: address_country
+        description: '{{ doc("address_country") }}'
+      - name: address_administrative_area_level_1_region_fr
+        description: '{{ doc("address_administrative_area_level_1_region_fr") }}'
+      - name: address_administrative_area_level_2_department_fr
+        description: '{{ doc("address_administrative_area_level_2_department_fr") }}'
+      - name: address_city_fr
+        description: '{{ doc("address_city_fr") }}'
+      - name: address_postal_code
+        description: '{{ doc("address_postal_code") }}'
+      - name: new_ambassadors_published
+        description: '{{ doc("new_ambassadors_published") }}'
