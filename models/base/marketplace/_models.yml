@@ -402,7 +402,7 @@ models:
         description: '{{ doc("company_sector_hidden_from_search") }}'
 
   - name: base__marketplace__conversations
-    description: "Model of all conversations with an ambassador initiated by a seeker. Often abbreviated CI (conversation initiated)"
+    description: "Model of all conversations with an ambassador initiated by a seeker. Often abbreviated IC (initiated conversation)"
     columns:
       - name: conversation_id
         description: '{{ doc("conversation_id") }}'

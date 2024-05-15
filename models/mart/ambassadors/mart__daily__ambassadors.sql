@@ -1,4 +1,5 @@
-{{ config(materialized='table') }}
+{{ config(materialized='table',
+        required_docs=true) }}
 
 WITH ambassadors_filled AS (
     SELECT
@@ -144,9 +145,9 @@ new_published_ambassadors AS (
         address_administrative_area_level_2_department_fr,
         address_city_fr,
         address_postal_code,
-        SUM(new_ambassadors_published) AS new_ambassadors_published
+        SUM(new_ambassadors_first_published) AS new_ambassadors_first_published
     FROM
-        {{ ref('int__marketplace__new_ambassadors_published') }}
+        {{ ref('int__marketplace__new_ambassadors_first_published') }}
     GROUP BY ALL
 ),
 
@@ -247,7 +248,7 @@ SELECT
     ambassadors_contacted,
     conversations_replied,
     ambassadors_replying,
-    new_ambassadors_published,
+    new_ambassadors_first_published,
     new_ambassadors_unpublished,
     new_ambassadors_iced_up,
     new_ambassadors_soft_deleted,

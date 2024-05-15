@@ -251,7 +251,7 @@ models:
       - name: new_ambassadors_first_disengaged_reason
         description: '{{ doc("new_ambassadors_first_disengaged_reason") }}'
 
-  - name: int__marketplace__new_ambassadors_published
+  - name: int__marketplace__new_ambassadors_first_published
     description: "Model per day around ambassadors newly published."
     columns:
       - name: ambassador_first_published_at
@@ -277,5 +277,5 @@ models:
         description: '{{ doc("address_city_fr") }}'
       - name: address_postal_code
         description: '{{ doc("address_postal_code") }}'
-      - name: new_ambassadors_published
-        description: '{{ doc("new_ambassadors_published") }}'
+      - name: new_ambassadors_first_published
+        description: '{{ doc("new_ambassadors_first_published") }}'

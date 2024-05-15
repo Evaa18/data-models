@@ -1,4 +1,5 @@
-{{ config(materialized='table') }}
+{{ config(materialized='table',
+        required_docs=true) }}
 
 WITH members_activated_and_created AS (
     SELECT

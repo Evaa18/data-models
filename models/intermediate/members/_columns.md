@@ -3,7 +3,7 @@ Date of measure.
 {% enddocs %}
 
 {% docs member_activated_at %}
-Timestamp of the first activation of a member. For seekers it is their first CI and for ambassadors it is when they have been published for the first time (for ambassador members, it is the earliest of those two dates).
+Timestamp of the first activation of a member. For seekers it is their first IC and for ambassadors it is when they have been published for the first time (for ambassador members, it is the earliest of those two dates).
 {% enddocs %}
 
 {% docs conversation_replied_at %}

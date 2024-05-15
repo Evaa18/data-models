@@ -67,6 +67,6 @@ Number of unique ambassadors newly disengaged (either iced up, soft deleted, res
 Reason of the first disengagement.
 {% enddocs %}
 
-{% docs new_ambassadors_published %}
+{% docs new_ambassadors_first_published %}
 Number of unique ambassadors newly published.
 {% enddocs %}

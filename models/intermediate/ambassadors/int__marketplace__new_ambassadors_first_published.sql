@@ -11,7 +11,7 @@ SELECT
     address_administrative_area_level_2_department_fr,
     address_city_fr,
     address_postal_code,
-    COUNT(DISTINCT ambassador_id) AS new_ambassadors_published
+    COUNT(DISTINCT ambassador_id) AS new_ambassadors_first_published
 FROM
     {{ ref('int__marketplace__ambassadors') }}
 GROUP BY ALL

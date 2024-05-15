@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int__marketplace__members_activation
-    description: "Model gathering information about all members' first activation (either having at their first CI for seekers or have been published for the first time for ambassadors)."
+    description: "Model gathering information about all members' first activation (either having at their first IC for seekers or have been published for the first time for ambassadors)."
     columns:
       - name: user_id
         description: '{{ doc("user_id") }}'

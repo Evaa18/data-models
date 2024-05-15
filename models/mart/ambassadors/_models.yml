@@ -56,8 +56,8 @@ models:
         description: '{{ doc("conversations_replied") }}'
       - name: ambassadors_replying
         description: '{{ doc("ambassadors_replying") }}'
-      - name: new_ambassadors_published
-        description: '{{ doc("new_ambassadors_published") }}'
+      - name: new_ambassadors_first_published
+        description: '{{ doc("new_ambassadors_first_published") }}'
       - name: new_ambassadors_unpublished
         description: '{{ doc("new_ambassadors_unpublished") }}'
       - name: new_ambassadors_iced_up

@@ -21,7 +21,7 @@ SELECT
         THEN 'industry'
         WHEN {{ ambassador_is_premium("ambassador_type") }}
         THEN 'premium_except_industry'
-        WHEN ambassador_type = 'Mentor' AND (user_situation = 'in_activity' OR users.user_created_at < {{ ambassador_members_release_date() }})
+        WHEN ambassador_type = 'Mentor' AND (user_situation = 'in_activity' OR users.user_created_at < {{ ambassadors_can_also_be_members_release_date() }})
         THEN 'ambassadors_except_youth'
         WHEN NOT user_situation = 'in_activity' AND users.user_created_at < {{ youth_ambassadors_release_date() }}
         THEN 'pre_ambivalence_member_now_youth_ambassador'

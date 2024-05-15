@@ -62,7 +62,7 @@ SELECT
         WHEN incomplete_profile.seeker_id IS NOT NULL THEN 'member_profile_is_incomplete'
         WHEN soft_deleted_members.seeker_id IS NOT NULL THEN 'member_is_soft_deleted'
         WHEN members_activation.seeker_id IS NOT NULL THEN 'member_is_activated'
-        WHEN members_deactivation.seeker_id IS NOT NULL THEN 'member_is_not_activated'
+        WHEN member_not_activated.seeker_id IS NOT NULL THEN 'member_is_not_activated'
         ELSE 'other'
     END AS member_activation,
     IF(
@@ -90,9 +90,9 @@ LEFT JOIN
     ON gap_fill_created_members.seeker_id = members_activation.seeker_id
     AND DATE(gap_fill_created_members.seeker_profile_created_at) >= DATE(members_activation.member_activated_at)
 LEFT JOIN
-    {{ ref('int__marketplace__members_activation') }} AS members_deactivation
-    ON gap_fill_created_members.seeker_id = members_deactivation.seeker_id
-    AND (DATE(gap_fill_created_members.seeker_profile_created_at) <= DATE(members_deactivation.member_activated_at) OR members_deactivation.member_activated_at IS NULL)
+    {{ ref('int__marketplace__members_activation') }} AS member_not_activated
+    ON gap_fill_created_members.seeker_id = member_not_activated.seeker_id
+    AND (DATE(gap_fill_created_members.seeker_profile_created_at) <= DATE(member_not_activated.member_activated_at) OR member_not_activated.member_activated_at IS NULL)
 LEFT JOIN
     {{ ref('base__marketplace__seekers') }} AS incomplete_profile
     ON gap_fill_created_members.seeker_id = incomplete_profile.seeker_id
