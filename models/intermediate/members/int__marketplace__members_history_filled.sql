@@ -77,10 +77,10 @@ SELECT
     ) }} AS member_secondary_type
 FROM
     gap_fill_created_members
-FULL OUTER JOIN
+LEFT JOIN
     {{ ref('int__marketplace__members_activation') }} AS activation
-    ON DATE(gap_fill_created_members.seeker_profile_created_at) = DATE(activation.member_activated_at)
-    AND activation.seeker_id = gap_fill_created_members.seeker_id
+    ON activation.seeker_id = gap_fill_created_members.seeker_id
+    AND DATE(gap_fill_created_members.seeker_profile_created_at) = DATE(activation.member_activated_at)
 LEFT JOIN
     soft_deleted_members
     ON gap_fill_created_members.seeker_id = soft_deleted_members.seeker_id
