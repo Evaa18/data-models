@@ -53,8 +53,8 @@ ambassador_members AS (
 )
 
 SELECT
-    COALESCE(gap_fill_created_members.seeker_id, activation.seeker_id) AS seeker_id,
-    COALESCE(gap_fill_created_members.seeker_profile_created_at, DATE(activation.member_activated_at)) AS measured_at,
+    COALESCE(gap_fill_created_members.seeker_id, activation.seeker_id, nuida_appointements.seeker_id) AS seeker_id,
+    COALESCE(gap_fill_created_members.seeker_profile_created_at, DATE(activation.member_activated_at), appointment_or_claim_created_on_platform_at) AS measured_at,
     gap_fill_created_members.* EXCEPT(seeker_id, seeker_profile_created_at),
     activation.user_id IS NOT NULL AS member_is_activated,
     nuida_appointments,
@@ -104,7 +104,7 @@ LEFT JOIN
     ambassador_members
     ON gap_fill_created_members.user_id = ambassador_members.user_id
     AND DATE(gap_fill_created_members.seeker_profile_created_at) = ambassador_members.seeker_profile_created_at
-LEFT JOIN
+FULL OUTER JOIN
     nuida_appointements
     ON gap_fill_created_members.seeker_id = nuida_appointements.seeker_id
     AND DATE(gap_fill_created_members.seeker_profile_created_at) = appointment_or_claim_created_on_platform_at

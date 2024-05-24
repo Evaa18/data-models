@@ -15,7 +15,7 @@ WITH members_activated_and_created AS (
         address_administrative_area_level_2_department_fr,
         address_city_fr,
         address_postal_code,
-        nuida_appointments,
+        SUM(nuida_appointments) AS nuida_appointments,
         COUNT(DISTINCT
             IF(
                 member_is_created,
