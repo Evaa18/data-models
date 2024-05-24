@@ -6,7 +6,7 @@ models:
     columns:
       - name: address_id
         description: '{{ doc("address_id") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: google_place_id
@@ -45,12 +45,12 @@ models:
     columns:
       - name: ambassador_crisis_id
         description: '{{ doc("ambassador_crisis_id") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: ambassador_id
         description: '{{ doc("ambassador_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: ambassador_crisis_created_at
         description: '{{ doc("ambassador_crisis_created_at") }}'
@@ -66,12 +66,12 @@ models:
     columns:
       - name: ambassador_id
         description: '{{ doc("ambassador_id") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: user_id
         description: '{{ doc("user_id") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: company_id
@@ -90,7 +90,7 @@ models:
         description: '{{ doc("style_ids") }}'
       - name: ambassador_created_at
         description: '{{ doc("ambassador_created_at") }}'
-        tests:
+        data_tests:
           - not_null
       - name: ambassador_updated_at
         description: '{{ doc("ambassador_updated_at") }}'
@@ -106,7 +106,7 @@ models:
         description: '{{ doc("ambassador_last_published_at") }}'
       - name: ambassador_first_publication_requested_at
         description: '{{ doc("ambassador_first_publication_requested_at") }}'
-        tests:
+        data_tests:
           - not_null:
               where: >
                 first_published_at is not null
@@ -114,7 +114,7 @@ models:
                 and professional_type = "Mentor"
       - name: ambassador_last_publication_requested_at
         description: '{{ doc("ambassador_last_publication_requested_at") }}'
-        tests:
+        data_tests:
           - not_null:
               where: >
                 first_published_at is not null
@@ -148,12 +148,12 @@ models:
         description: '{{ doc("ambassador_type") }}'
       - name: ambassador_company_name
         description: '{{ doc("ambassador_company_name") }}'
-        tests:
+        data_tests:
           - not_null:
               where: is_published is true
       - name: ambassador_company_size
         description: '{{ doc("ambassador_company_size") }}'
-        tests:
+        data_tests:
           - not_null:
               where: is_published is true
       - name: ambassador_company_attributes
@@ -220,16 +220,16 @@ models:
     columns:
       - name: appointment_claim_id
         description: '{{ doc("appointment_claim_id") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: ambassador_id
         description: '{{ doc("ambassador_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: seeker_id
         description: '{{ doc("seeker_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: conversation_id
         description: '{{ doc("conversation_id") }}'
@@ -251,38 +251,38 @@ models:
         description: '{{ doc("appointment_address") }}'
       - name: appointment_meeting_place
         description: '{{ doc("appointment_meeting_place") }}'
-        tests:
+        data_tests:
           - not_null:
               where: >
                 appointment_type = 'face_to_face'
                 AND created_on_platform_at > '2017-11-04'
       - name: appointment_coordinates
         description: '{{ doc("appointment_coordinates") }}'
-        tests:
+        data_tests:
           - not_null:
               where: appointment_type = 'face_to_face'
       - name: appointment_time_zone
         description: '{{ doc("appointment_time_zone") }}'
 
-  - name: base__marketplace__appointment
+  - name: base__marketplace__appointments
     description: "Information around the appointments registered on the platform by an ambassador."
     columns:
       - name: appointment_id
         description: '{{ doc("appointment_id") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: ambassador_id
         description: '{{ doc("ambassador_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: seeker_id
         description: '{{ doc("seeker_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: conversation_id
         description: '{{ doc("conversation_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: appointment_claim_id
         description: '{{ doc("appointment_claim_id") }}'
@@ -306,19 +306,19 @@ models:
         description: '{{ doc("appointment_address") }}'
       - name: appointment_meeting_place
         description: '{{ doc("appointment_meeting_place") }}'
-        tests:
+        data_tests:
           - not_null:
               where: appointment_type = 'face_to_face'
       - name: appointment_coordinates
         description: '{{ doc("appointment_coordinates") }}'
-        tests:
+        data_tests:
           - not_null:
               where: appointment_type = 'face_to_face'
       - name: appointment_time_zone
         description: '{{ doc("appointment_time_zone") }}'
       - name: appointment_general_status
         description: '{{ doc("appointment_general_status") }}'
-        tests:
+        data_tests:
           - accepted_values:
               values:
                 - unbooked
@@ -332,7 +332,7 @@ models:
                 - stood_up_by_professional
       - name: appointment_seeker_feedback_type
         description: '{{ doc("appointment_seeker_feedback_type") }}'
-        tests:
+        data_tests:
           - accepted_values:
               values:
                 - unbooked
@@ -346,7 +346,7 @@ models:
                 - did_not_take_place_custom_reason
       - name: appointment_ambassador_feedback_type
         description: '{{ doc("appointment_ambassador_feedback_type") }}'
-        tests:
+        data_tests:
           - not_null
           - accepted_values:
               values:
@@ -361,12 +361,12 @@ models:
                 - did_not_take_place_custom_reason
       - name: appointment_seeker_custom_cancellation_reason
         description: '{{ doc("appointment_seeker_custom_cancellation_reason") }}'
-        tests:
+        data_tests:
           - not_null:
               where: student_feedback_type = 'did_not_take_place_custom_reason'
       - name: appointment_ambassador_custom_cancellation_reason
         description: '{{ doc("appointment_ambassador_custom_cancellation_reason") }}'
-        tests:
+        data_tests:
           - not_null:
               where: professional_feedback_type = 'did_not_take_place_custom_reason'
       - name: appointment_feedback_from_ambassador
@@ -385,7 +385,7 @@ models:
     columns:
       - name: company_sector_id
         description: '{{ doc("company_sector_id") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: company_sector_created_at
@@ -406,18 +406,18 @@ models:
     columns:
       - name: conversation_id
         description: '{{ doc("conversation_id") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: seeker_user_id
         description: '{{ doc("user_id") }}'
-        tests:
+        data_tests:
           - relationships:
               to: ref ('base__marketplace__users')
               field: user_id
       - name: ambassador_user_id
         description: '{{ doc("user_id") }}'
-        tests:
+        data_tests:
           - relationships:
               to: ref ('base__marketplace__users')
               field: user_id
@@ -425,7 +425,7 @@ models:
         description: '{{ doc("seeker_id") }}'
       - name: ambassador_id
         description: '{{ doc("ambassador_id") }}'
-        tests:
+        data_tests:
           - relationships:
               to: ref ('base__marketplace__ambassadors')
               field: user_id
@@ -445,15 +445,15 @@ models:
         description: '{{ doc("user_situation") }}'
       - name: conversation_denormalized_last_sender_id
         description: '{{ doc("conversation_denormalized_last_sender_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: conversation_initiated_at
         description: '{{ doc("conversation_initiated_at") }}'
-        tests:
+        data_tests:
           - not_null
       - name: conversation_updated_at
         description: '{{ doc("conversation_updated_at") }}'
-        tests:
+        data_tests:
           - not_null
       - name: conversation_denormalized_last_message_sent_at
         description: '{{ doc("conversation_denormalized_last_message_sent_at") }}'
@@ -469,7 +469,7 @@ models:
         description: '{{ doc("conversation_last_invalidated_at") }}'
       - name: ambassador_type
         description: '{{ doc("ambassador_type") }}'
-        tests:
+        data_tests:
           - accepted_values:
               values:
                 - Ambassador
@@ -499,12 +499,12 @@ models:
     columns:
       - name: seeker_id
         description: '{{ doc("seeker_id") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: user_id
         description: '{{ doc("user_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: seeker_profile_created_at
         description: '{{ doc("seeker_profile_created_at") }}'
@@ -564,16 +564,16 @@ models:
     columns:
       - name: user_id
         description: '{{ doc("user_id") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: intercom_user_id
         description: '{{ doc("intercom_user_id") }}'
-        tests:
+        data_tests:
           - unique
       - name: france_travail_id
         description: '{{ doc("france_travail_id") }}'
-        tests:
+        data_tests:
           - unique
       - name: desired_meeting_address_id
         description: '{{ doc("desired_meeting_address_id") }}'
@@ -615,7 +615,7 @@ models:
         description: '{{ doc("user_meeting_place") }}'
       - name: user_situation
         description: '{{ doc("user_situation") }}'
-        tests:
+        data_tests:
           - accepted_values:
               values:
               - "junior_high_school_student"
@@ -629,20 +629,20 @@ models:
         description: '{{ doc("user_email_locale") }}'
       - name: user_referrer_code
         description: '{{ doc("user_referrer_code") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: user_is_high_school_teacher
         description: '{{ doc("user_is_high_school_teacher") }}'
-        tests:
+        data_tests:
           - not_null
       - name: user_is_oriane_ambassador
         description: '{{ doc("user_is_oriane_ambassador") }}'
-        tests:
+        data_tests:
           - not_null
       - name: user_has_france_travail_connect
         description: '{{ doc("user_has_france_travail_connect") }}'
-        tests:
+        data_tests:
           - not_null
       - name: user_is_subscribed_to_red_carpets
         description: '{{ doc("user_is_subscribed_to_red_carpets") }}'

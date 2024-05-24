@@ -6,7 +6,7 @@ models:
     columns:
       - name: measured_at
         description: '{{ doc("measured_at") }}'
-        tests:
+        data_tests:
           - not_null
       - name: member_primary_type
         description: '{{ doc("member_primary_type") }}'

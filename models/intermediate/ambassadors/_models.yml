@@ -6,15 +6,15 @@ models:
     columns:
       - name: dbt_valid_from
         description: '{{ doc("dbt_valid_from") }}'
-        tests:
+        data_tests:
           - not_null
       - name: ambassador_id
         description: '{{ doc("ambassador_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: user_id
         description: '{{ doc("user_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: ambassador_classification
         description: '{{ doc("ambassador_classification") }}'
@@ -66,15 +66,15 @@ models:
     columns:
       - name: dbt_valid_from
         description: '{{ doc("dbt_valid_from") }}'
-        tests:
+        data_tests:
           - not_null
       - name: ambassador_id
         description: '{{ doc("ambassador_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: user_id
         description: '{{ doc("user_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: ambassador_classification
         description: '{{ doc("ambassador_classification") }}'
@@ -114,11 +114,11 @@ models:
     columns:
       - name: ambassador_id
         description: '{{ doc("ambassador_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: user_id
         description: '{{ doc("user_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: ambassador_classification
         description: '{{ doc("ambassador_classification") }}'
@@ -152,7 +152,7 @@ models:
     columns:
       - name: conversation_replied_at
         description: '{{ doc("conversation_denormalized_ambassador_first_response_at") }}'
-        tests:
+        data_tests:
           - not_null
       - name: ambassador_classification
         description: '{{ doc("ambassador_classification") }}'
@@ -182,7 +182,7 @@ models:
     columns:
       - name: conversation_initiated_at
         description: '{{ doc("conversation_initiated_at") }}'
-        tests:
+        data_tests:
           - not_null
       - name: ambassador_classification
         description: '{{ doc("ambassador_classification") }}'
@@ -212,11 +212,11 @@ models:
     columns:
       - name: ambassador_id
         description: '{{ doc("ambassador_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: dbt_valid_from
         description: '{{ doc("dbt_valid_from") }}'
-        tests:
+        data_tests:
           - not_null
       - name: ambassador_classification
         description: '{{ doc("ambassador_classification") }}'
@@ -256,7 +256,7 @@ models:
     columns:
       - name: ambassador_first_published_at
         description: '{{ doc("ambassador_first_published_at") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: ambassador_classification

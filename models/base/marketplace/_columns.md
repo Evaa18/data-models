@@ -2,6 +2,10 @@
 Unique user ID of the account owner.
 {% enddocs %}
 
+{% docs appointment_id %}
+Unique ID of the appointment.
+{% enddocs %}
+
 {% docs intercom_user_id %}
 Unique user ID from Intercom.
 {% enddocs %}

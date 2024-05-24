@@ -6,16 +6,16 @@ models:
     columns:
       - name: appointment_or_claim_id
         description: '{{ doc("appointment_or_claim_id") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: ambassador_id
         description: '{{ doc("ambassador_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: seeker_id
         description: '{{ doc("seeker_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: conversation_id
         description: '{{ doc("conversation_id") }}'
@@ -59,7 +59,7 @@ models:
     columns:
       - name: targeted_at
         description: '{{ doc("targeted_at") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: target_value__nuida_appointments
@@ -70,16 +70,16 @@ models:
     columns:
       - name: appointment_or_claim_id
         description: '{{ doc("appointment_or_claim_id") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: ambassador_id
         description: '{{ doc("ambassador_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: seeker_id
         description: '{{ doc("seeker_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: conversation_id
         description: '{{ doc("conversation_id") }}'

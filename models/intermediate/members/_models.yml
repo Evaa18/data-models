@@ -6,12 +6,12 @@ models:
     columns:
       - name: user_id
         description: '{{ doc("user_id") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: seeker_id
         description: '{{ doc("seeker_id") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: member_activated_at
@@ -22,15 +22,15 @@ models:
     columns:
       - name: seeker_id
         description: '{{ doc("seeker_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: measured_at
         description: '{{ doc("measured_at") }}'
-        tests:
+        data_tests:
           - not_null
       - name: user_id
         description: '{{ doc("user_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: member_primary_type
         description: '{{ doc("member_primary_type") }}'
@@ -68,15 +68,15 @@ models:
     columns:
       - name: seeker_id
         description: '{{ doc("seeker_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: seeker_profile_created_at
         description: '{{ doc("seeker_profile_created_at") }}'
-        tests:
+        data_tests:
           - not_null
       - name: user_id
         description: '{{ doc("user_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: member_primary_type
         description: '{{ doc("member_primary_type") }}'
@@ -104,7 +104,7 @@ models:
     columns:
       - name: conversation_replied_at
         description: '{{ doc("conversation_replied_at") }}'
-        tests:
+        data_tests:
           - not_null
       - name: member_primary_type
         description: '{{ doc("member_primary_type") }}'
@@ -136,7 +136,7 @@ models:
     columns:
       - name: conversation_initiated_at
         description: '{{ doc("conversation_initiated_at") }}'
-        tests:
+        data_tests:
           - not_null
       - name: ambassador_company_name
         description: '{{ doc("ambassador_company_name") }}'
@@ -166,11 +166,11 @@ models:
     columns:
       - name: seeker_id
         description: '{{ doc("seeker_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: user_id
         description: '{{ doc("user_id") }}'
-        tests:
+        data_tests:
           - not_null
       - name: seeker_profile_created_at
         description: '{{ doc("seeker_profile_created_at") }}'

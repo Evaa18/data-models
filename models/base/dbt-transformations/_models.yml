@@ -6,7 +6,7 @@ models:
     columns:
       - name: user_id
         description: '{{ doc("user_id") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: user_is_france_travail_job_seeker
@@ -17,7 +17,7 @@ models:
     columns:
       - name: user_id
         description: '{{ doc("user_id") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: last_program_end_at
@@ -36,7 +36,7 @@ models:
     columns:
       - name: ambassador_id
         description: '{{ doc("ambassador_id") }}'
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: company_id
