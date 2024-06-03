@@ -34,7 +34,7 @@ SELECT
     france_travail_id IS NOT NULL AS user_has_france_travail_connect,
     subscribed_to_news AS user_is_subscribed_to_red_carpets,
     videoconference_link_visible AS user_has_videoconference_enabled,
-    soft_deleted_at IS NOT NULL AS user_is_user_soft_deleted,
+    soft_deleted_at IS NOT NULL AS user_is_soft_deleted,
     soft_deleted_reason AS user_soft_deleted_reason,
     anonymized_at IS NOT NULL AS user_is_anonymized,
     sign_up_utm AS user_sign_up_utm

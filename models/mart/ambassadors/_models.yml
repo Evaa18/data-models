@@ -14,6 +14,8 @@ models:
         description: '{{ doc("ambassador_company_name") }}'
       - name: company_sector_name
         description: '{{ doc("company_sector_name") }}'
+      - name: ambassador_job_title
+        description: '{{ doc("ambassador_job_title") }}'
       - name: address_country
         description: '{{ doc("address_country") }}'
       - name: address_administrative_area_level_1_region_fr

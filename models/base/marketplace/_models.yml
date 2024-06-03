@@ -648,8 +648,8 @@ models:
         description: '{{ doc("user_is_subscribed_to_red_carpets") }}'
       - name: user_has_videoconference_enabled
         description: '{{ doc("user_has_videoconference_enabled") }}'
-      - name: user_is_user_soft_deleted
-        description: '{{ doc("user_is_user_soft_deleted") }}'
+      - name: user_is_soft_deleted
+        description: '{{ doc("user_is_soft_deleted") }}'
       - name: user_soft_deleted_reason
         description: '{{ doc("user_soft_deleted_reason") }}'
       - name: user_is_anonymized

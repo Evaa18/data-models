@@ -134,7 +134,7 @@ Boelean taking the value true when the user has suscribed to newsletters, false 
 Boelean taking the value true when the user activated the videoconference feature, false otherwise.
 {% enddocs %}
 
-{% docs user_is_user_soft_deleted %}
+{% docs user_is_soft_deleted %}
 Boelean taking the value true when the user is soft deleted, false otherwise.
 {% enddocs %}
 

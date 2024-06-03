@@ -54,19 +54,19 @@ ambassador_members AS (
 
 SELECT
     COALESCE(gap_fill_created_members.seeker_id, activation.seeker_id, nuida_appointements.seeker_id) AS seeker_id,
-    COALESCE(gap_fill_created_members.seeker_profile_created_at, DATE(activation.member_activated_at), appointment_or_claim_created_on_platform_at) AS measured_at,
+    COALESCE(gap_fill_created_members.seeker_profile_created_at, DATE(activation.member_activated_at)) AS measured_at,
     gap_fill_created_members.* EXCEPT(seeker_id, seeker_profile_created_at),
     activation.user_id IS NOT NULL AS member_is_activated,
     nuida_appointments,
     CASE
-        WHEN incomplete_profile.seeker_id IS NOT NULL THEN 'member_profile_is_incomplete'
-        WHEN soft_deleted_members.seeker_id IS NOT NULL THEN 'member_is_soft_deleted'
         WHEN members_activation.seeker_id IS NOT NULL THEN 'member_is_activated'
+        WHEN soft_deleted_members.seeker_id IS NOT NULL THEN 'member_is_soft_deleted_before_activation'
+        WHEN incomplete_profile.seeker_id IS NOT NULL THEN 'member_profile_is_incomplete'
         WHEN member_not_activated.seeker_id IS NOT NULL THEN 'member_is_not_activated'
         ELSE 'other'
     END AS member_activation,
     IF(
-        user_is_currently_involved_in_a_fdr OR user_is_all_time_involved_in_a_fdr,
+        user_is_all_time_involved_in_a_fdr,
         'member_affiliated',
         'member_non_affiliated'
     ) AS member_affiliation,

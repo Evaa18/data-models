@@ -77,3 +77,35 @@ models:
         description: '{{ doc("dbt_valid_from") }}'
       - name: dbt_valid_to
         description: '{{ doc("dbt_valid_to") }}'
+
+  - name: base__dbt_transformations__snapshot_users_ambivalence
+    description: "View of a snapshot in dbt-transformations with users' information."
+    columns:
+      - name: user_id
+        description: '{{ doc("user_id") }}'
+        data_tests:
+          - not_null
+      - name: user_first_name
+        description: '{{ doc("user_first_name") }}'
+      - name: user_last_name
+        description: '{{ doc("user_last_name") }}'
+      - name: user_normalized_phone
+        description: '{{ doc("user_normalized_phone") }}'
+      - name: user_is_ambivalent
+        description: '{{ doc("user_is_ambivalent") }}'
+      - name: user_situation
+        description: '{{ doc("user_situation") }}'
+      - name: user_is_subscribed_to_red_carpets
+        description: '{{ doc("user_is_subscribed_to_red_carpets") }}'
+      - name: user_is_soft_deleted
+        description: '{{ doc("user_is_soft_deleted") }}'
+      - name: user_is_anonymized
+        description: '{{ doc("user_is_anonymized") }}'
+      - name: dbt_scd_id
+        description: '{{ doc("dbt_scd_id") }}'
+      - name: dbt_updated_at
+        description: '{{ doc("dbt_updated_at") }}'
+      - name: dbt_valid_from
+        description: '{{ doc("dbt_valid_from") }}'
+      - name: dbt_valid_to
+        description: '{{ doc("dbt_valid_to") }}'
