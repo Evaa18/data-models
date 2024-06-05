@@ -3,14 +3,14 @@
 WITH ambassador_members AS (
     SELECT
         members.user_id,
-        DATE(seeker_profile_created_at) AS seeker_profile_created_at,
+        DATE(members.dbt_valid_from) AS dbt_valid_from,
         IF(ambassador_is_published IS NULL, FALSE, ambassador_is_published) AS ambassador_is_published
     FROM
-        {{ ref('int__marketplace__members') }} AS members
+        {{ ref('int__marketplace__members_history') }} AS members
     LEFT JOIN
         {{ ref('int__marketplace__ambassadors_history_filled') }} AS ambassadors
         ON members.user_id = ambassadors.user_id
-        AND DATE(members.seeker_profile_created_at) = DATE(dbt_valid_from)
+        AND DATE(members.dbt_valid_from) = DATE(ambassadors.dbt_valid_from)
 )
 
 SELECT
@@ -33,10 +33,10 @@ SELECT
 FROM
     {{ ref('base__marketplace__conversations') }} AS conversations
 INNER JOIN
-    {{ ref('int__marketplace__members') }} AS seekers
+    {{ ref('int__marketplace__members_history') }} AS seekers
     USING(seeker_id)
 LEFT JOIN
     ambassador_members
     ON seekers.user_id = ambassador_members.user_id
-    AND DATE(seekers.seeker_profile_created_at) = DATE(ambassador_members.seeker_profile_created_at)
+    AND DATE(seekers.dbt_valid_from) = DATE(ambassador_members.dbt_valid_from)
 GROUP BY ALL

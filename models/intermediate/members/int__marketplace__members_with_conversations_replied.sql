@@ -20,10 +20,10 @@ SELECT
 FROM
     {{ ref('base__marketplace__conversations') }} AS conversations
 LEFT JOIN
-    {{ ref('int__marketplace__members') }} AS seekers
+    {{ ref('int__marketplace__members_history') }} AS seekers
     USING(seeker_id)
 LEFT JOIN
     {{ ref('int__marketplace__ambassadors_history_filled') }} AS history_filled
-    ON DATE(conversation_initiated_at) = DATE(dbt_valid_from)
+    ON DATE(seekers.dbt_valid_from) = DATE(history_filled.dbt_valid_from)
     AND seekers.user_id = history_filled.user_id
 GROUP BY ALL

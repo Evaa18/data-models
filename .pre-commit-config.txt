@@ -1,0 +1,9 @@
+repos:
+- repo: https://github.com/sqlfluff/sqlfluff
+  rev: 2.3.5
+  hooks:
+    - id: sqlfluff-lint
+      # For dbt projects, this installs the dbt "extras".
+      # You will need to select the relevant dbt adapter for your dialect
+      # (https://docs.getdbt.com/docs/available-adapters):
+      additional_dependencies : ['dbt-bigquery', 'sqlfluff-templater-dbt']

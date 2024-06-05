@@ -1,0 +1,8 @@
+# dbt
+target/
+dbt_modules/
+dbt_packages/
+logs/
+seeds/
+target/
+macros/

@@ -11,7 +11,7 @@ Timestamp of when the conversation received a reply.
 {% enddocs %}
 
 {% docs member_is_created %}
-Boolean taking the value true if the member is i created, false otherwise.
+Boolean taking the value true if the member is created, false otherwise.
 {% enddocs %}
 
 {% docs member_is_activated %}
@@ -36,4 +36,8 @@ Number of unique seekers that have initiated a conversation.
 
 {% docs conversations_sent %}
 Number of unique conversations that have been sent.
+{% enddocs %}
+
+{% docs user_is_affiliated_to_any_vocation_program %}
+Boolean taking the value true if the user has ever been affiliated to a vocational program, false otherwise.
 {% enddocs %}
