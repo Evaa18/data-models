@@ -98,3 +98,4 @@ FULL OUTER JOIN
     ON DATE(members_activated_and_created.measured_at) = target.targeted_at
     AND members_activated_and_created.member_primary_type = target.member_primary_type
     AND members_activated_and_created.member_secondary_type = target.member_secondary_type
+
